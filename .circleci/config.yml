@@ -1,0 +1,103 @@
+version: 2.1
+jobs:
+  rspec:
+    working_directory: ~/amorer
+    docker:
+      - image: circleci/ruby
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: Setup environment variable
+          command: |
+            echo "export COMPOSE_FILE=docker-compose.ci.yml" >> $BASH_ENV
+      - run:
+          name: Start containers and verify it is working
+          command: |
+            set -x
+            docker-compose up -d --build
+            docker exec amorer_rails_web curl -4 --retry 10 --retry-delay 3 --retry-connrefused http://localhost:3000
+      - run:
+          name: Setup database
+          command: |
+            docker-compose exec amorer_web rails db:create
+            docker-compose exec amorer_web rails db:schema:load
+      - run:
+          name: Run rspec
+          command: docker-compose exec amorer_web rspec
+
+  rubocop:
+    working_directory: ~/amorer
+    docker:
+      - image: circleci/ruby:2.7.1
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - gemfiles-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+            - gemfiles-{{ .Branch }}-
+            - gemfiles-master-
+      - run: bundle config --local path vendor/bundle
+      - run:
+          name: bundle install
+          command: bundle check || bundle install --jobs=8 --clean
+      - run:
+          name: Run rubocop
+          command: bundle exec rubocop --parallel
+      - save_cache:
+          key: gemfiles-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
+
+  deploy:
+    working_directory: ~/amorer
+    docker:
+      - image: buildpack-deps:trusty
+    steps:
+      - checkout
+      - run:
+          name: Install Heroku CLI, if necessary
+          command: |
+            if [[ $(command -v heroku) == "" ]]; then
+              curl https://cli-assets.heroku.com/install.sh | sh
+            else
+              echo "Heroku is already installed. No operation was performed."
+            fi
+      - run:
+          name: App_name setting by Branch
+          command: |
+            if [ $CIRCLE_BRANCH == master ]; then
+              echo "export APP_NAME=amorer" >> $BASH_ENV
+            else
+              echo "export APP_NAME=amorer-sample" >> $BASH_ENV
+            fi
+      - run:
+          name: Deploy
+          command: |
+            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$APP_NAME.git master
+      - run:
+          name: Set database, if necessary
+          command: |
+            if [ -z `heroku config:get JAWSDB_URL --app $APP_NAME` ]; then
+              heroku addons:create jawsdb --app $APP_NAME
+              DATABASE_URL=`heroku config:get JAWSDB_URL --app $APP_NAME`
+              DATABASE_URL2=${DATABASE_URL/mysql/mysql2}
+              heroku config:set DATABASE_URL=$DATABASE_URL2 --app $APP_NAME
+            else
+              echo "Database has been already set."
+            fi
+      - run:
+          name: Run post-deploy tasks
+          command: |
+            heroku run --app $APP_NAME rails db:migrate
+
+workflows:
+  version: 2.1
+  build:
+    jobs:
+      - rspec
+      - rubocop
+      - deploy:
+          requires:
+            - rspec
+            - rubocop
