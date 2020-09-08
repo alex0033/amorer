@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe "BasicPages", type: :request do
-
   describe "GET /home" do
     it "returns http success" do
       get root_path
@@ -15,5 +14,4 @@ RSpec.describe "BasicPages", type: :request do
       expect(response.status).to eq(200)
     end
   end
-
 end
