@@ -10,6 +10,10 @@ a {
   margin-top: 20px;
 }
 
+.main {
+  margin: 30px 0px;
+}
+
 ul {
   list-style: none;
 }
@@ -31,7 +35,26 @@ ul {
   }
 }
 
-// main
-.main {
-  margin: 30px 0px;
+// form-box
+.form-box {
+  margin: 0 auto;
+  p, h2 {
+    text-align: center;
+  }
+  form {
+    label {
+      margin-top: 20px;
+    }
+    input[type="email"], input[type="password"], input[type="text"] {
+      width: 100%;
+    }
+    input[type="submit"] {
+      width: 64%;
+      margin: 20px 18%;
+    }
+    textarea {
+      width: 100%;
+    }
+    border-bottom: 1px solid lightgray;
+  }
 }
