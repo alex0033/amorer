@@ -1,0 +1,19 @@
+<div class="header">
+  <div class="container">
+    <!-- どの画面にいるか項目の下に線を引いて見る  -->
+    <div class="left">
+      <%= link_to "アモリル", root_path, class: "logo" %>
+      <%= link_to "求人検索", root_path, class: "ml-2" %>
+    </div>
+    <div class="right">
+      <!-- この下ログインしていない時のみ -->
+      <%= link_to "アカウント作成", '#' %>
+      <%= link_to "ログイン", '#', class: "ml-2" %>
+      <!-- この下ログイン時のみ ＋　アイコンに変更する-->
+      <%#= link_to "メッセージ", '#' %>
+      <%#= link_to "プロフィール", '#' %>
+      <!-- この下常時 -->
+      <%= link_to "求人広告掲載", '#', class: "ml-2" %>
+    </div>
+  </div>
+</div>
