@@ -16,7 +16,13 @@ RUN set -ex && \
     curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add - && \
     echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list && \
     apt-get update -qq && \
-    apt-get install -y yarn
+    apt-get install -y yarn unzip && \
+    : "Install chromedriver" && \
+    CHROME_DRIVER_VERSION=`curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE` && \
+    curl -O "https://chromedriver.storage.googleapis.com/${CHROME_DRIVER_VERSION}/chromedriver_linux64.zip" && \
+    unzip chromedriver_linux64.zip && \
+    mv chromedriver /usr/bin/ && \
+    rm chromedriver_linux64.zip
 
 ADD . /amorer
 RUN bundle install
