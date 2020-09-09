@@ -31,7 +31,9 @@ RUN set -ex && \
     mv ~/chromedriver /usr/bin/chromedriver && \
     apt-get clean
 
+ADD ./Gemfile Gemfile
+ADD ./Gemfile.lock Gemfile.lock
 RUN bundle install
 ADD . /amorer
 
-RUN yarn upgrade && rails webpacker:install
+RUN yarn upgrade
