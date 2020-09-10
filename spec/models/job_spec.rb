@@ -50,5 +50,4 @@ RSpec.describe Job, type: :model do
 
     it { expect(job.valid?).to be false }
   end
-
 end

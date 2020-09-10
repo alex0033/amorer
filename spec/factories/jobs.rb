@@ -1,8 +1,8 @@
 FactoryBot.define do
   factory :job do
-    title { "MyString" }
-    pay { "MyString" }
-    explanation { "MyText" }
+    sequence(:title) { |n| "title_sample#{n}" }
+    pay { "1000yen" }
+    explanation { "It is very good." }
     user { nil }
   end
 end

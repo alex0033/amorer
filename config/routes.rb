@@ -4,4 +4,5 @@ Rails.application.routes.draw do
   get 'policy', to: 'basic_pages#policy'
   devise_for :users, :controllers => { :registrations => :registrations }
   resources :users, only: :show
+  resources :jobs
 end
