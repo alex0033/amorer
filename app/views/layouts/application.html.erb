@@ -3,11 +3,14 @@
   <%= render 'layouts/head' %>
   <body>
     <%= render 'layouts/header' %>
-    <div class="container">
-      <div class="main">
-        <%= yield %>
+    <div class="main-wrapper">
+      <%= render 'layouts/flashes' %>
+      <div class="container">
+        <div class="main row">
+          <%= yield %>
+        </div>
       </div>
+      <%= render 'layouts/footer' %>
     </div>
-    <%= render 'layouts/footer' %>
   </body>
 </html>

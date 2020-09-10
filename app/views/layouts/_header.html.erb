@@ -6,12 +6,13 @@
       <%= link_to "求人検索", root_path, class: "ml-2" %>
     </div>
     <div class="right">
-      <!-- この下ログインしていない時のみ -->
-      <%= link_to "アカウント作成", '#' %>
-      <%= link_to "ログイン", '#', class: "ml-2" %>
-      <!-- この下ログイン時のみ ＋　アイコンに変更する-->
-      <%#= link_to "メッセージ", '#' %>
-      <%#= link_to "プロフィール", '#' %>
+      <% if user_signed_in? %>
+        <%= link_to "メッセージ", '#' %>
+        <%= link_to "プロフィール", user_path(current_user), class: "ml-2" %>
+      <% else %>
+        <%= link_to "アカウント作成", new_user_registration_path %>
+        <%= link_to "ログイン", new_user_session_path, class: "ml-2" %>
+      <% end %>
       <!-- この下常時 -->
       <%= link_to "求人広告掲載", '#', class: "ml-2" %>
     </div>
