@@ -8,7 +8,7 @@
     <div class="right">
       <% if user_signed_in? %>
         <%= link_to "メッセージ", '#' %>
-        <%= link_to "プロフィール", '#', class: "ml-2" %>
+        <%= link_to "プロフィール", user_path(current_user), class: "ml-2" %>
       <% else %>
         <%= link_to "アカウント作成", new_user_registration_path %>
         <%= link_to "ログイン", new_user_session_path, class: "ml-2" %>

@@ -6,12 +6,17 @@ a {
   color: black;
 }
 
-.main-contents{
-  margin-top: 20px;
-}
-
-.main {
-  margin: 30px 0px;
+.main-wrapper {
+  .main {
+    padding: 30px 0px;
+    .main-contents{
+      margin: 20px auto;
+      // background: rgba(176, 242, 75, 0.07);
+      // box-shadow: 10px 10px 10px rgba(209, 75, 242, 0.07);
+      // padding: 10px 20px;
+      // border-radius: 5px;
+    }
+  }
 }
 
 ul {
@@ -20,6 +25,7 @@ ul {
 
 // header
 .header {
+  // background: rgba(176, 242, 75, 0.07);
   .container {
     display: flex;
     justify-content: space-between;
@@ -57,4 +63,10 @@ ul {
     }
     border-bottom: 1px solid lightgray;
   }
+}
+
+// user_show
+.self_introduction {
+  border-top: 1px solid lightgray;
+  border-bottom: 1px solid lightgray;
 }
