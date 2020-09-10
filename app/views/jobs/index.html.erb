@@ -1,4 +1,9 @@
 <div class="main-contents col-md-8">
-  <h2>求人一覧</h2>
-  <%= render @jobs %>
+  <%= form_tag(jobs_path, method: :get, class: "search-form") do %>
+    <%= text_field_tag :search %>
+    <%= submit_tag '検索', name: nil, class: "search-btn" %>
+  <% end %>
+  <div class="jobs my-5 row">
+    <%= render @jobs %>
+  </div>
 </div>

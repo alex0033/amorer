@@ -3,7 +3,7 @@
     <!-- どの画面にいるか項目の下に線を引いて見る  -->
     <div class="left">
       <%= link_to "アモリル", root_path, class: "logo" %>
-      <%= link_to "求人検索", root_path, class: "ml-2" %>
+      <%= link_to "求人検索", jobs_path, class: "ml-2" %>
     </div>
     <div class="right">
       <% if user_signed_in? %>
@@ -14,7 +14,7 @@
         <%= link_to "ログイン", new_user_session_path, class: "ml-2" %>
       <% end %>
       <!-- この下常時 -->
-      <%= link_to "求人広告掲載", '#', class: "ml-2" %>
+      <%= link_to "求人広告掲載", new_job_path, class: "ml-3" %>
     </div>
   </div>
 </div>

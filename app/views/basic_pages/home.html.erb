@@ -3,7 +3,7 @@
   <div class="message-wrap">
     <h1>さぁ、アルバイトからはじめよう！！</h1>
   </div>
-  <%= form_tag '#', method: :get, class: "search-form" do %>
+  <%= form_tag jobs_path, method: :get, class: "search-form" do %>
     <%= text_field_tag :search %>
     <%= submit_tag "検索", name: nil, class: "search-btn" %>
   <% end %>

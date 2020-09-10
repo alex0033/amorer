@@ -16,11 +16,12 @@
 
     <div class="field">
       <%= f.label :explanation, "説明 (2000文字以内)" %>
-      <%= f.password_field :explanation, autocomplete: "explanation" %>
+      <%= f.text_area :explanation, autocomplete: "explanation" %>
     </div>
 
     <div class="actions">
       <%= f.submit "更新" %>
     </div>
   <% end %>
+  <p><%= button_to "削除", job_path(@job), data: { confirm: "本当に削除しますか？" }, method: :delete %></p>
 </div>

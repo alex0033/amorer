@@ -23,6 +23,7 @@ class JobsController < ApplicationController
   end
 
   def show
+    @user = @job.user
   end
 
   def edit
