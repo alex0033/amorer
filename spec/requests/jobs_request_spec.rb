@@ -88,7 +88,7 @@ RSpec.describe "Jobs", type: :request do
 
           it { expect(response.status).to eq(302) }
           it { expect(response).to redirect_to job_path(job.id) }
-          it { expect(Job.find_by(title: job_built.title)).to be_truthy}
+          it { expect(Job.find_by(title: job_built.title)).to be_truthy }
         end
 
         context "when invalid_params" do

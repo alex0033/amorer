@@ -10,7 +10,7 @@ RSpec.describe "Jobs", type: :system do
     sign_in user
     visit root_path
     within(:css, '.header') do
-      click_on "求人検索"
+      click_on "アモリル"
     end
     expect(page).to have_content(job.title)
     expect(page).to have_content(other_job.title)
@@ -20,7 +20,7 @@ RSpec.describe "Jobs", type: :system do
     expect(page).to have_current_path job_path(job)
     expect(page).to have_link("求人広告を変更したい場合はココをクリック")
     within(:css, '.header') do
-      click_on "求人検索"
+      click_on "アモリル"
     end
     within(:css, '.main-contents') do
       click_on other_job.title
