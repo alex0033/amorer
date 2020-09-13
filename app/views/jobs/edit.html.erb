@@ -23,6 +23,7 @@
       <%= f.submit "更新", id: "job_update_button" %>
     </div>
   <% end %>
-  <p><%= button_to "削除", job_path(@job), data: { confirm: "本当に削除しますか？" },
-                                        method: :delete, id: "job_delete_button" %></p>
+  <p><%= button_to "削除", job_path(@job),
+                   data: { confirm: "本当に削除しますか？" },
+                   method: :delete, id: "job_delete_button" %></p>
 </div>

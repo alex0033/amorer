@@ -88,6 +88,7 @@ RSpec.describe "Jobs", type: :request do
 
           it { expect(response.status).to eq(302) }
           it { expect(response).to redirect_to job_path(job.id) }
+          it { expect(Job.find_by(title: job_built.title)).to be_truthy}
         end
 
         context "when invalid_params" do
@@ -98,6 +99,7 @@ RSpec.describe "Jobs", type: :request do
 
           it { expect(response.status).to eq(200) }
           it { expect(response.body).to include("求人編集") }
+          it { expect(Job.find_by(title: job_built.title)).to be_falsy }
         end
       end
 
@@ -109,6 +111,7 @@ RSpec.describe "Jobs", type: :request do
 
         it { expect(response.status).to eq(302) }
         it { expect(response).to redirect_to root_path }
+        it { expect(Job.find_by(title: job_built.title)).to be_falsy }
       end
 
       context "when not signed_in" do
@@ -118,6 +121,7 @@ RSpec.describe "Jobs", type: :request do
 
         it { expect(response.status).to eq(302) }
         it { expect(response).to redirect_to new_user_session_path }
+        it { expect(Job.find_by(title: job_built.title)).to be_falsy }
       end
     end
 
@@ -130,7 +134,7 @@ RSpec.describe "Jobs", type: :request do
 
         it { expect(response.status).to eq(302) }
         it { expect(response).to redirect_to root_path }
-        # 削除が成功しました。
+        it { expect(Job.find_by(title: job.title)).to be_falsy }
       end
 
       context "when not correct_user" do
@@ -141,7 +145,7 @@ RSpec.describe "Jobs", type: :request do
 
         it { expect(response.status).to eq(302) }
         it { expect(response).to redirect_to root_path }
-        # 正しいユーザーではありません
+        it { expect(Job.find_by(title: job.title)).to be_truthy }
       end
 
       context "when not signed_in" do
@@ -151,6 +155,7 @@ RSpec.describe "Jobs", type: :request do
 
         it { expect(response.status).to eq(302) }
         it { expect(response).to redirect_to new_user_session_path }
+        it { expect(Job.find_by(title: job.title)).to be_truthy }
       end
     end
   end
@@ -180,7 +185,6 @@ RSpec.describe "Jobs", type: :request do
 
   describe "#create" do
     let!(:user) { create(:user) }
-    let!(:job) { build(:job, user: user) }
 
     context "when signed_in" do
       context "when data is valid" do
@@ -191,6 +195,7 @@ RSpec.describe "Jobs", type: :request do
 
         it { expect(response.status).to eq(302) }
         it { expect(response).to redirect_to job_path(Job.find_by(title: job_built.title)) }
+        it { expect(Job.find_by(title: job_built.title)).to be_truthy }
       end
 
       context "when data is invalid" do
@@ -201,6 +206,7 @@ RSpec.describe "Jobs", type: :request do
 
         it { expect(response.status).to eq(200) }
         it { expect(response.body).to include("求人作成") }
+        it { expect(Job.find_by(title: job_built.title)).to be_falsy }
       end
     end
 
@@ -211,6 +217,7 @@ RSpec.describe "Jobs", type: :request do
 
       it { expect(response.status).to eq(302) }
       it { expect(response).to redirect_to new_user_session_path }
+      it { expect(Job.find_by(title: job_built.title)).to be_falsy }
     end
   end
 end
