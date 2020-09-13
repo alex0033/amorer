@@ -1,7 +1,7 @@
 <div class="form-box col-md-8">
   <h2>求人作成</h2>
 
-  <%= form_with(model: @job, remote: true) do |f| %>
+  <%= form_with(model: @job, local: true) do |f| %>
     <%= render "devise/shared/error_messages", resource: f.object %>
 
     <div class="field">
@@ -20,7 +20,7 @@
     </div>
 
     <div class="actions">
-      <%= f.submit "作成" %>
+      <%= f.submit "作成", id: "job_create_button" %>
     </div>
   <% end %>
 </div>

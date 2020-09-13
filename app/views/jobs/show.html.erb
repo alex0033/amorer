@@ -11,7 +11,7 @@
       説明:
       <p><%= @job.explanation %></p>
     </div>
-    <% if @user %>
+    <% if @user == current_user %>
       <%= link_to "求人広告を変更したい場合はココをクリック", edit_job_path(@job) %>
     <% end %>
   </div>

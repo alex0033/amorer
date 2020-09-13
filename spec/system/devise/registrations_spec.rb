@@ -16,18 +16,19 @@ RSpec.describe "Devise/Registrations", type: :system do
       fill_in('user_email', with: "invalid")
       fill_in('user_password', with: password)
       fill_in('user_password_confirmation', with: password)
-      click_on "アカウント作成"
-      expect(page).to have_content("アカウント作成")
+      click_on 'user_create_button'
+      expect(page).to have_selector 'h2', text: "アカウント作成"
+      expect(page).to have_selector '#error_explanation'
     end
     # 正しい入力
     within(:css, '.form-box') do
       fill_in('user_email', with: new_user.email)
       fill_in('user_password', with: "password")
       fill_in('user_password_confirmation', with: "password")
-      click_on "アカウント作成"
+      click_on 'user_create_button'
     end
+    expect(page).to have_selector '.alert-success'
     expect(page).to have_current_path user_path(User.find_by(email: new_user.email))
-    # flash_massage??
   end
 
   it "update user" do
@@ -38,18 +39,18 @@ RSpec.describe "Devise/Registrations", type: :system do
     within(:css, '.form-box') do
       fill_in('user_name', with: name_changed)
       fill_in('user_current_password', with: "invalid")
-      click_on "更新"
-      expect(page).to have_content("プロフィール編集")
+      click_on 'user_update_button'
+      expect(page).to have_selector 'h2', text: "プロフィール編集"
+      expect(page).to have_selector '#error_explanation'
     end
-    # ここでエラーメッセージ確認？？
     # 正しい入力
     within(:css, '.form-box') do
       fill_in('user_email', with: "valid@example.com")
       fill_in('user_current_password', with: "password")
-      click_on "更新"
+      click_on 'user_update_button'
     end
+    expect(page).to have_selector '.alert-success'
     expect(page).to have_current_path user_path(user)
-    # flash_massage??
   end
 
   it "delete user", js: true do
@@ -57,9 +58,10 @@ RSpec.describe "Devise/Registrations", type: :system do
     visit edit_user_registration_path
     within(:css, '.form-box') do
       page.accept_confirm("本当に削除しますか？") do
-        click_on "アカウント削除"
+        click_on 'user_delete_button'
       end
     end
+    expect(page).to have_selector '.alert-success'
     expect(page).to have_current_path root_path
   end
 end

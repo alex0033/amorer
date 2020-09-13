@@ -68,8 +68,12 @@ ul {
 
 // error
 .field_with_errors {
-  background-color: #fcc;
-  padding: 2px;
+  display: contents;
+  input, textarea {
+    @extend .is-invalid;
+    background-color: #fcc;
+    padding: 2px;
+  }
 }
 
 // search
