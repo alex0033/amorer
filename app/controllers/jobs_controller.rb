@@ -4,8 +4,7 @@ class JobsController < ApplicationController
   before_action :current_user_check, only: [:edit, :update, :destroy]
 
   def index
-    @jobs = Job.all
-    # ページネーション
+    @jobs = Job.search(params[:search]).paginate(page: params[:page])
   end
 
   def new

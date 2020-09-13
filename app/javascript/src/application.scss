@@ -9,8 +9,18 @@ a {
 .main-wrapper {
   .main {
     padding: 30px 0px;
-    .main-contents{
+    .main-contents {
       margin: 20px auto;
+    }
+  }
+}
+
+div.pagination {
+  text-align: center;
+  ul {
+    margin: 0 auto;
+    li {
+      margin: 0 4px;
     }
   }
 }
@@ -90,6 +100,9 @@ ul {
 }
 
 // jobs
+.jobs-box {
+
+}
 .jobs {
   a {
     .job {
@@ -101,7 +114,6 @@ ul {
     }
   }
 }
-
 .job-content-detail {
   border-bottom: 1px solid lightgray
 }
