@@ -3,6 +3,6 @@ FactoryBot.define do
     sequence(:title) { |n| "title_sample#{n}" }
     pay { "1000yen" }
     explanation { "It is very good." }
-    user { nil }
+    user { create(:user) }
   end
 end
