@@ -6,23 +6,25 @@ RSpec.describe "Devise/Sessions", type: :system do
 
   it "make session" do
     visit root_path
-    within(:css, '.header') do
-      click_on "ログイン"
+    within(:css, '.header .normal-links') do
+      click_on 'ログイン'
     end
     expect(page).to have_current_path new_user_session_path
     # 不正な入力
     within(:css, '.form-box') do
-      fill_in('user_email', with: "invalid")
+      fill_in('user_email', with: "invalid@invalid.com")
       fill_in('user_password', with: password)
-      click_on "ログイン"
-      expect(page).to have_content("ログイン")
+      click_on 'login_button'
+      expect(page).to have_selector 'h2', text: "ログイン"
     end
+    expect(page).to have_selector '.alert-warning'
     # 正しい入力
     within(:css, '.form-box') do
       fill_in('user_email', with: user.email)
       fill_in('user_password', with: password)
-      click_on "ログイン"
+      click_on 'login_button'
     end
+    expect(page).to have_selector '.alert-success'
     expect(page).to have_current_path root_path
   end
 
@@ -30,8 +32,9 @@ RSpec.describe "Devise/Sessions", type: :system do
     sign_in user
     visit edit_user_registration_path
     within(:css, '.form-box') do
-      click_on "ログアウト"
+      click_on 'logout_button'
     end
+    expect(page).to have_selector '.alert-success'
     expect(page).to have_current_path root_path
   end
 end

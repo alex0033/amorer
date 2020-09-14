@@ -3,18 +3,19 @@
     <!-- どの画面にいるか項目の下に線を引いて見る  -->
     <div class="left">
       <%= link_to "アモリル", root_path, class: "logo" %>
-      <%= link_to "求人検索", root_path, class: "ml-2" %>
     </div>
-    <div class="right">
-      <% if user_signed_in? %>
-        <%= link_to "メッセージ", '#' %>
-        <%= link_to "プロフィール", user_path(current_user), class: "ml-2" %>
-      <% else %>
-        <%= link_to "アカウント作成", new_user_registration_path %>
-        <%= link_to "ログイン", new_user_session_path, class: "ml-2" %>
-      <% end %>
-      <!-- この下常時 -->
-      <%= link_to "求人広告掲載", '#', class: "ml-2" %>
+    <div class="right d-sm-block d-none">
+      <div class="normal-links">
+        <%= render 'layouts/right_links', dropdown_item: false %>
+      </div>
+    </div>
+    <div class="right dropdown d-sm-none">
+      <a class="dropdown-toggle d-sm-none" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        メニュー
+      </a>
+      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
+        <%= render 'layouts/right_links', dropdown_item: true %>
+      </div>
     </div>
   </div>
 </div>

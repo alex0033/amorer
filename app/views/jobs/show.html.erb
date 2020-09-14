@@ -1,0 +1,18 @@
+<div class="main-contents col-md-8">
+  <div class="job mt-2">
+    <div class="job-content-detail">
+      <h3><%= @job.title %></h3>
+      発注者：<br>
+      <%= link_to @user.name, user_path(@user) %><br>
+      <br>
+      報酬：<br>
+      <strong><%= @job.pay %></strong><br>
+      <br>
+      説明:
+      <p><%= safe_join(@job.explanation.split("\n"), tag(:br)) %></p>
+    </div>
+    <% if @user == current_user %>
+      <%= link_to "求人広告を変更したい場合はココをクリック", edit_job_path(@job) %>
+    <% end %>
+  </div>
+</div>

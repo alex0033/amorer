@@ -1,0 +1,26 @@
+<div class="form-box col-md-8">
+  <h2>求人作成</h2>
+
+  <%= form_with(model: @job, local: true) do |f| %>
+    <%= render "devise/shared/error_messages", resource: f.object %>
+
+    <div class="field">
+      <%= f.label :title, "仕事名 (30文字以内)" %>
+      <%= f.text_field :title, autofocus: true, autocomplete: "title" %>
+    </div>
+
+    <div class="field">
+      <%= f.label :pay, "報酬 (30文字以内)" %>
+      <%= f.text_field :pay, autocomplete: "pay" %>
+    </div>
+
+    <div class="field">
+      <%= f.label :explanation, "説明 (2000文字以内)" %>
+      <%= f.text_area :explanation, autocomplete: "explanation" %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit "作成", id: "job_create_button" %>
+    </div>
+  <% end %>
+</div>

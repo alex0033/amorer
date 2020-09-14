@@ -7,7 +7,7 @@ RSpec.describe "Users", type: :system do
   it "show user_info" do
     sign_in user
     visit root_path
-    within(:css, '.header') do
+    within(:css, '.header .normal-links') do
       click_on "プロフィール"
     end
     expect(page).to have_current_path user_path(user)
