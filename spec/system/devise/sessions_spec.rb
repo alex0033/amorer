@@ -6,7 +6,7 @@ RSpec.describe "Devise/Sessions", type: :system do
 
   it "make session" do
     visit root_path
-    within(:css, '.header') do
+    within(:css, '.header .normal-links') do
       click_on 'ログイン'
     end
     expect(page).to have_current_path new_user_session_path

@@ -5,30 +5,16 @@
       <%= link_to "アモリル", root_path, class: "logo" %>
     </div>
     <div class="right d-sm-block d-none">
-      <div class="menu-case">
-        <% if user_signed_in? %>
-          <%= link_to "メッセージ", '#' %>
-          <%= link_to "プロフィール", user_path(current_user), class: "ml-sm-2" %>
-        <% else %>
-          <%= link_to "アカウント作成", new_user_registration_path %>
-          <%= link_to "ログイン", new_user_session_path, class: "ml-sm-2" %>
-        <% end %>
-          <%= link_to "求人広告掲載", new_job_path, class: "ml-sm-3" %>
+      <div class="normal-links">
+        <%= render 'layouts/right_links', dropdown_item: false %>
       </div>
     </div>
     <div class="right dropdown d-sm-none">
       <a class="dropdown-toggle d-sm-none" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         メニュー
       </a>
-      <div class="dropdown-menu dropdown-menu-right menu-case" aria-labelledby="dropdownMenuLink">
-        <% if user_signed_in? %>
-          <%= link_to "メッセージ", '#', class: "dropdown-item" %>
-          <%= link_to "プロフィール", user_path(current_user), class: "dropdown-item" %>
-        <% else %>
-          <%= link_to "アカウント作成", new_user_registration_path, class: "dropdown-item" %>
-          <%= link_to "ログイン", new_user_session_path, class: "dropdown-item" %>
-        <% end %>
-          <%= link_to "求人広告掲載", new_job_path, class: "dropdown-item" %>
+      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
+        <%= render 'layouts/right_links', dropdown_item: true %>
       </div>
     </div>
   </div>

@@ -32,7 +32,7 @@ RSpec.describe "Jobs", type: :system do
   it "makes job" do
     sign_in user
     visit root_path
-    within(:css, '.header') do
+    within(:css, '.header .normal-links') do
       click_on "求人広告掲載"
     end
     expect(page).to have_current_path new_job_path

@@ -1,0 +1,13 @@
+<% if user_signed_in? %>
+  <%= link_to "メッセージ", '#',
+              class: "#{show_as(dropdown_item)}" %>
+  <%= link_to "プロフィール", user_path(current_user),
+              class: "#{show_as(dropdown_item)} ml-sm-2" %>
+<% else %>
+  <%= link_to "アカウント作成", new_user_registration_path,
+              class: "#{show_as(dropdown_item)}" %>
+  <%= link_to "ログイン", new_user_session_path,
+              class: "#{show_as(dropdown_item)} ml-sm-2" %>
+<% end %>
+<%= link_to "求人広告掲載", new_job_path,
+            class: "#{show_as(dropdown_item)} ml-sm-3" %>

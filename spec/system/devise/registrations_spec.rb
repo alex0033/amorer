@@ -7,7 +7,7 @@ RSpec.describe "Devise/Registrations", type: :system do
 
   it "makes user" do
     visit root_path
-    within(:css, '.header') do
+    within(:css, '.header .normal-links') do
       click_on "アカウント作成"
     end
     expect(page).to have_current_path new_user_registration_path
