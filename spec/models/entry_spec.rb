@@ -18,4 +18,13 @@ RSpec.describe Entry, type: :model do
 
     it { expect(entry.valid?).to be false }
   end
+
+  context "when duplicated" do
+    let(:entry) { build(:entry, user: user, job: job) }
+    let!(:duplicated_entry) { create(:entry, user: user, job: job) }
+    let(:user) { create(:user) }
+    let(:job) { create(:job) }
+
+    it { expect(entry.valid?).to be_falsy }
+  end
 end
