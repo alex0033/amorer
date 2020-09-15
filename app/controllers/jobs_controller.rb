@@ -1,6 +1,6 @@
 class JobsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
-  before_action :put_value_in_job, only: [:show, :edit, :update, :destroy]
+  before_action :set_user_and_job, only: [:show, :edit, :update, :destroy]
   before_action :current_user_check, only: [:edit, :update, :destroy]
 
   def index
@@ -49,17 +49,11 @@ class JobsController < ApplicationController
     params.require(:job).permit(:title, :pay, :explanation)
   end
 
-  def put_value_in_job
+  def set_user_and_job
     unless @job = Job.find_by(id: params[:id])
       flash[:danger] = "求人が存在しません。"
       redirect_to root_path
     end
-  end
-
-  def current_user_check
-    unless current_user == @job.user
-      flash[:danger] = "権限の無い行為です。"
-      redirect_to root_path
-    end
+    @user = @job.user
   end
 end

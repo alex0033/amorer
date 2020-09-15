@@ -12,4 +12,8 @@ class Job < ApplicationRecord
       or(where("explanation LIKE ?", "%#{search}%")).
       order(created_at: :desc)
   end
+
+  def is_entered_by(user)
+    Entry.find_by(user: user, job: self)
+  end
 end
