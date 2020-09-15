@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
   def current_user_check
     unless current_user == @user
       flash[:danger] = "権限の無い行為です。"
-      redirect_to root_path, status: :found
+      redirect_to root_path
     end
   end
 end

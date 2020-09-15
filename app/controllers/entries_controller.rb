@@ -1,6 +1,5 @@
 class EntriesController < ApplicationController
   before_action :custom_authenticate_user!
-  before_action :authenticate_user!
   before_action :set_user_and_entry, only: :destroy
   before_action :current_user_check, only: :destroy
 
