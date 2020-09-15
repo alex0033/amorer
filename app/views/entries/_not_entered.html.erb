@@ -1,0 +1,6 @@
+<%= form_with(model: job.entries.build, remote: true) do |f| %>
+  <div><%= hidden_field_tag :job_id, job.id %></div>
+  <%= button_tag(class: "btn btn-default btn-xs") do %>
+    <%= content_tag :span, "応募する" %>
+  <% end %>
+<% end %>
