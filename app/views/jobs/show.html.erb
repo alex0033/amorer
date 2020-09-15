@@ -12,7 +12,9 @@
       <p><%= safe_join(@job.explanation.split("\n"), tag(:br)) %></p>
     </div>
     <div id="entry-button">
-      <% if entry = @job.is_entered_by(current_user) %>
+      <% if @user == current_user %>
+        <%= render 'users/user_index_modal', users: @job.entry_users %>
+      <% elsif entry = @job.is_entered_by(current_user) %>
         <%= render 'entries/entered', entry: entry %>
       <% else %>
         <%= render 'entries/not_entered', job: @job %>

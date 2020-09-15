@@ -1,4 +1,5 @@
 class EntriesController < ApplicationController
+  before_action :custom_authenticate_user!
   before_action :authenticate_user!
   before_action :set_user_and_entry, only: :destroy
   before_action :current_user_check, only: :destroy
@@ -24,6 +25,13 @@ class EntriesController < ApplicationController
   end
 
   private
+
+  def custom_authenticate_user!
+    unless user_signed_in?
+      flash[:warning] = "ログインしてください。"
+      redirect_to new_user_session_path
+    end
+  end
 
   def set_user_and_entry
     @entry = Entry.find(params[:id])

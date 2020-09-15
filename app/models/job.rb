@@ -1,6 +1,7 @@
 class Job < ApplicationRecord
   belongs_to :user
   has_many :entries, dependent: :destroy
+  has_many :entry_users, through: :entries, source: :user
 
   validates :title,       presence: true, length: { maximum: 30 }
   validates :pay,         presence: true, length: { maximum: 30 }
