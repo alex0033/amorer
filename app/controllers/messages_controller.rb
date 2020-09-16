@@ -13,6 +13,7 @@ class MessagesController < ApplicationController
     @receiver = User.find(params[:receiver_id])
     @message = Message.new(create_params)
     if @message.save
+      flash[:success] = "メッセージを送信しました。"
       redirect_to @message
     else
       render 'messages/new'
