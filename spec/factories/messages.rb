@@ -4,7 +4,6 @@ FactoryBot.define do
     receiver { create(:user) }
     sender { create(:user) }
     read { false }
-    kind { 0 }
     content { "MyText" }
   end
 end

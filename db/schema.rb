@@ -37,7 +37,6 @@ ActiveRecord::Schema.define(version: 2020_09_16_005505) do
     t.integer "receiver_id"
     t.integer "sender_id"
     t.boolean "read", default: false, null: false
-    t.integer "kind", default: 0, null: false
     t.text "content"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

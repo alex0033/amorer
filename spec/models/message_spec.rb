@@ -49,12 +49,6 @@ RSpec.describe Message, type: :model do
     it { expect(message.valid?).to be false }
   end
 
-  context "when kind is nil" do
-    let(:message) { build(:message, kind: nil) }
-
-    it { expect(message.valid?).to be false }
-  end
-
   context "when content is too long" do
     let(:message) { build(:message, content: "a" * 2001) }
 

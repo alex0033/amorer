@@ -1,2 +1,26 @@
-<h2>メッセージ作成</h2>
-<p>Find me in app/views/messages/new.html.erb</p>
+<div class="form-box col-md-8">
+  <h2>メッセージ作成</h2>
+  <%= form_with(model: @message, local: true) do |f| %>
+    <%= render "devise/shared/error_messages", resource: f.object %>
+
+    <div class="field">
+      <%= f.label :title, "メッセージタイトル (30文字以内)" %>
+      <%= f.text_field :title, autofocus: true, autocomplete: "title" %>
+    </div>
+
+    <div class="field">
+      <%= f.label :receiver, "送る相手" %><br>
+      <%= @receiver.name %>
+      <%= hidden_field_tag :receiver_id, @receiver.id %>
+    </div>
+
+    <div class="field">
+      <%= f.label :content, "内容 (2000文字以内)" %>
+      <%= f.text_area :content, autocomplete: "content" %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit "送信", id: "message_create_button" %>
+    </div>
+  <% end %>
+</div>

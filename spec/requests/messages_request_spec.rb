@@ -17,7 +17,6 @@ RSpec.describe "Messages", type: :request do
       let(:sender) { create(:user) }
       let(:receiver) { create(:user) }
 
-      #より細かい場合分けもする？？
       before do
         sign_in receiver
         get messages_path
@@ -31,20 +30,21 @@ RSpec.describe "Messages", type: :request do
   end
 
   describe "#new" do
+    let(:sender) { create(:user) }
+    let(:receiver) { create(:user) }
+
     context "when not signed_in" do
       before do
-        get new_message_path
+        get new_message_path(receiver_id: receiver.id)
       end
 
       it_behaves_like "filter not_signed_in_user without Ajax"
     end
 
     context "when signed_in" do
-      let(:sender) { create(:user) }
-
       before do
         sign_in sender
-        get new_message_path
+        get new_message_path(receiver_id: receiver.id)
       end
 
       it { expect(response.status).to eq(200) }
@@ -61,7 +61,6 @@ RSpec.describe "Messages", type: :request do
         receiver_id: receiver.id,
         message: {
           title: message_built.title,
-          kind: message_built.kind,
           content: message_built.content,
         },
       }
@@ -71,11 +70,11 @@ RSpec.describe "Messages", type: :request do
         receiver_id: receiver.id,
         message: {
           title: "",
-          kind: message_built.kind,
           content: message_built.content,
         },
       }
     end
+
     context "when not signed_in" do
       before do
         post messages_path, params: valid_params
@@ -104,7 +103,7 @@ RSpec.describe "Messages", type: :request do
         end
 
         it { expect(response.status).to eq(302) }
-        it { expect(response).to redirect_to message_path(Message.find_by(title: message_built.title)) }
+        it { expect(response).to redirect_to message_path(Message.last) }
         it { expect(Message.find_by(title: message_built.title)).to be_truthy }
       end
     end

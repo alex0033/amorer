@@ -1,9 +1,9 @@
 class User < ApplicationRecord
   has_many :jobs,    dependent: :destroy
   has_many :entries, dependent: :destroy
-  has_many :receiving_messages, class_name:  "Message",
+  has_many :receiving_messages, class_name: "Message",
                                 foreign_key: "receiver_id"
-  has_many :sending_messages,   class_name:  "Message",
+  has_many :sending_messages,   class_name: "Message",
                                 foreign_key: "sender_id"
 
   # Include default devise modules. Others available are:

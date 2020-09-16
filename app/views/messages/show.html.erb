@@ -1,2 +1,17 @@
-<h2><%= @message.title %></h2>
-<p>Find me in app/views/messages/show.html.erb</p>
+<div class="main-contents col-md-8">
+  <h2><%= @message.title %></h2>
+  <div class="message-sender">
+    <strong>送信者</strong>
+    <p><%= link_to @message.sender.name, user_path(@message.sender) %></p>
+  </div>
+  <div class="message-sender">
+    <strong>受信者</strong>
+    <p><%= link_to @message.receiver.name, user_path(@message.receiver) %></p>
+  </div>
+  <div class="massege-content">
+    <strong>内容</strong>
+    <% if text = @message.content.presence %>
+      <p><%= safe_join(text.split("\n"), tag(:br)) %><p>
+    <% end %>
+  </div>
+</div>

@@ -9,5 +9,7 @@
   </div>
   <% if @user == current_user %>
     <%= link_to "プロフィール編集はこちら", edit_user_registration_path %>
+  <% else %>
+    <%= link_to "メッセージを送る", new_message_path(receiver_id: @user.id) %>
   <% end %>
 </div>

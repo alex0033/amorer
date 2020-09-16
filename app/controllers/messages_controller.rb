@@ -7,6 +7,7 @@ class MessagesController < ApplicationController
 
   def new
     @message = Message.new
+    @receiver = User.find(params[:receiver_id])
   end
 
   def create
@@ -22,6 +23,11 @@ class MessagesController < ApplicationController
 
   def show
     @message = Message.find(params[:id])
+    @sender = @message.sender
+    @receiver = @message.receiver
+    if @receiver == current_user
+      @message.read = true
+    end
   end
 
   private
@@ -32,8 +38,7 @@ class MessagesController < ApplicationController
         title: par[:title],
         receiver: @receiver,
         sender: current_user,
-        kind: par[:kind],
-        content: par[:content]
+        content: par[:content],
       }
     end
   end

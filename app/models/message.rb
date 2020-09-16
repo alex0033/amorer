@@ -6,6 +6,5 @@ class Message < ApplicationRecord
   validates :receiver_id, presence: true
   validates :sender_id,   presence: true
   validates :read,        inclusion: { in: [true, false] }
-  validates :kind,        presence: true
   validates :content,     presence: true, length: { maximum: 2000 }
 end
