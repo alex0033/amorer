@@ -1,2 +1,6 @@
-<h1>Messages#index</h1>
-<p>Find me in app/views/messages/index.html.erb</p>
+<h2>受信メッセージ一覧</h2>
+<% if @messages.any? %>
+  <%= will_paginate %>
+  <%= render @messages %>
+  <%= will_paginate %>
+<% end %>

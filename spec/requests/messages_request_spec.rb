@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "Messages", type: :request do
   describe "#index" do
-    context "when not singed_in" do
+    context "when not signed_in" do
       before do
         get messages_path
       end
@@ -10,7 +10,7 @@ RSpec.describe "Messages", type: :request do
       it_behaves_like "filter not_signed_in_user without Ajax"
     end
 
-    context "when singed_in" do
+    context "when signed_in" do
       let!(:message1) { create(:message, sender: sender, receiver: receiver) }
       let!(:message2) { create(:message, sender: sender, receiver: receiver) }
       let!(:message3) { create(:message, sender: receiver, receiver: sender) }
@@ -19,7 +19,7 @@ RSpec.describe "Messages", type: :request do
 
       #より細かい場合分けもする？？
       before do
-        singed_in receiver
+        sign_in receiver
         get messages_path
       end
 
@@ -31,7 +31,7 @@ RSpec.describe "Messages", type: :request do
   end
 
   describe "#new" do
-    context "when not singed_in" do
+    context "when not signed_in" do
       before do
         get new_message_path
       end
@@ -39,12 +39,12 @@ RSpec.describe "Messages", type: :request do
       it_behaves_like "filter not_signed_in_user without Ajax"
     end
 
-    context "when singed_in" do
+    context "when signed_in" do
       let(:sender) { create(:user) }
-      let(:receiver) { create(:user) }
 
       before do
-        get new_messages_path
+        sign_in sender
+        get new_message_path
       end
 
       it { expect(response.status).to eq(200) }
@@ -53,14 +53,14 @@ RSpec.describe "Messages", type: :request do
   end
 
   describe "#create" do
-    let(:sender) { create(:user) }
-    let(:receiver) { create(:user) }
+    let!(:sender) { create(:user) }
+    let!(:receiver) { create(:user) }
     let(:message_built) { build(:message, sender: sender, receiver: receiver) }
     let(:valid_params) do
       {
+        receiver_id: receiver.id,
         message: {
           title: message_built.title,
-          recceiver: receiver,
           kind: message_built.kind,
           content: message_built.content,
         },
@@ -68,28 +68,28 @@ RSpec.describe "Messages", type: :request do
     end
     let(:invalid_params) do
       {
+        receiver_id: receiver.id,
         message: {
           title: "",
-          recceiver: receiver,
           kind: message_built.kind,
           content: message_built.content,
         },
       }
     end
-    context "when not singed_in" do
+    context "when not signed_in" do
       before do
-        get messages_path, params: valid_params
+        post messages_path, params: valid_params
       end
 
       it_behaves_like "filter not_signed_in_user without Ajax"
       it { expect(Message.find_by(title: message_built.title)).to be_falsy }
     end
 
-    context "when singed_in" do
+    context "when signed_in" do
       context "when invalid params" do
         before do
-          signed_in
-          get messages_path, params: invalid_params
+          sign_in sender
+          post messages_path, params: invalid_params
         end
 
         it { expect(response.status).to eq(200) }
@@ -99,8 +99,8 @@ RSpec.describe "Messages", type: :request do
 
       context "when valid params" do
         before do
-          signed_in
-          get messages_path, params: valid_params
+          sign_in sender
+          post messages_path, params: valid_params
         end
 
         it { expect(response.status).to eq(302) }
@@ -111,22 +111,23 @@ RSpec.describe "Messages", type: :request do
   end
 
   describe "#show" do
-    context "when not singed_in" do
+    let!(:message) { create(:message, sender: sender, receiver: receiver) }
+    let!(:other_message) { create(:message, sender: receiver, receiver: sender) }
+    let(:sender) { create(:user) }
+    let(:receiver) { create(:user) }
+
+    context "when not signed_in" do
       before do
-        get messages_path(message)
+        get message_path(message)
       end
 
       it_behaves_like "filter not_signed_in_user without Ajax"
     end
 
-    context "when singed_in" do
-      let!(:message) { create(:message, sender: sender, receiver: receiver) }
-      let!(:other_message) { create(:message, sender: receiver, receiver: sender) }
-      let(:sender) { create(:user) }
-      let(:receiver) { create(:user) }
-
+    context "when signed_in" do
       before do
-        get messages_path(message)
+        sign_in receiver
+        get message_path(message)
       end
 
       it { expect(response.status).to eq(200) }
