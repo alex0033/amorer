@@ -25,12 +25,23 @@ class MessagesController < ApplicationController
     @message = Message.find(params[:id])
     @sender = @message.sender
     @receiver = @message.receiver
+    correct_user_check
     if @receiver == current_user
-      @message.read = true
+      @message.update(read: true)
+      cookies[NUMBER_OF_MESSAGES] = {
+        value: current_user.count_not_read_messages,
+        expires: CUSTOM_COOKIES_TIME,
+      }
     end
   end
 
   private
+
+  def correct_user_check
+    unless [@receiver, @sender].include? current_user
+      not_correct_user_action
+    end
+  end
 
   def create_params
     if par = params[:message]

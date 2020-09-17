@@ -1,6 +1,7 @@
 <% if user_signed_in? %>
-  <%= link_to "メッセージ", messages_path,
-              class: "#{show_as(dropdown_item)}" %>
+  <a href="<%= messages_path %>" class="<%= show_as(dropdown_item) %>">
+    メッセージ<span><%= show_messages_count %></span>
+  </a>
   <%= link_to "プロフィール", user_path(current_user),
               class: "#{show_as(dropdown_item)} ml-sm-2" %>
 <% else %>

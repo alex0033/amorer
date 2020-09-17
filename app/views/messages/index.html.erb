@@ -1,10 +1,12 @@
-<div class="main-contents">
+<div class="main-contents col-md-8">
   <h2>受信メッセージ一覧</h2>
-  <% if @messages.any? %>
-    <%= will_paginate %>
-    <div class="messages">
-      <%= render @messages %>
-    </div>
-    <%= will_paginate %>
-  <% end %>
+  <div class="messages-wrapper my-5">
+    <% if @messages.any? %>
+      <%= will_paginate %>
+      <div class="messages">
+        <%= render @messages %>
+      </div>
+      <%= will_paginate %>
+    <% end %>
+  </div>
 </div>

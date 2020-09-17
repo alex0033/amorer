@@ -114,6 +114,7 @@ RSpec.describe "Messages", type: :request do
     let!(:other_message) { create(:message, sender: receiver, receiver: sender) }
     let(:sender) { create(:user) }
     let(:receiver) { create(:user) }
+    let(:other_user) { create(:user) }
 
     context "when not signed_in" do
       before do
@@ -123,7 +124,16 @@ RSpec.describe "Messages", type: :request do
       it_behaves_like "filter not_signed_in_user without Ajax"
     end
 
-    context "when signed_in" do
+    context "when not correct_user" do
+      before do
+        sign_in other_user
+        get message_path(message)
+      end
+
+      it_behaves_like "filter not_correct_user without Ajax"
+    end
+
+    context "when correct_user" do
       before do
         sign_in receiver
         get message_path(message)
