@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :count_messages
 
-  after_action :delete_message_session, only: :destroy, if: :devise_controller?
+  after_action :delete_message_cookies, only: :destroy, if: :devise_controller?
 
   protected
 
@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
     redirect_to root_path
   end
 
-  def delete_message_session
+  def delete_message_cookies
     cookies.delete(NUMBER_OF_MESSAGES)
   end
 

@@ -6,6 +6,10 @@ a {
   color: black;
 }
 
+p {
+  margin-bottom: 0;
+}
+
 .main-wrapper {
   .main {
     padding: 30px 0px;
@@ -16,7 +20,6 @@ a {
 }
 
 div.pagination {
-  text-align: center;
   ul {
     margin: 0 auto;
     li {
@@ -27,6 +30,11 @@ div.pagination {
 
 ul {
   list-style: none;
+}
+
+.bottom-links {
+  display: flex;
+  justify-content: space-between;
 }
 
 // header
@@ -79,12 +87,6 @@ ul {
   }
 }
 
-// user_show
-.self_introduction {
-  border-top: 1px solid lightgray;
-  border-bottom: 1px solid lightgray;
-}
-
 // error
 .field_with_errors {
   display: contents;
@@ -108,23 +110,18 @@ ul {
   }
 }
 
-// jobs
-.jobs-box {
-
-}
+// job
 .jobs {
   a {
     .job {
       padding: 10px;
       border-radius: 10px;
       background: rgba(176, 242, 75, 0.07);
+      border: 0.3px solid black;
       height: 250px;
       overflow: hidden;
     }
   }
-}
-.job-content-detail {
-  border-bottom: 1px solid lightgray
 }
 
 // message
@@ -134,8 +131,11 @@ ul {
     padding: 5px;
     border-radius: 5px;
     border: 1px solid black;
-    p {
-      margin: 0
+    .message-title {
+      text-align: left;
+    }
+    .message-date {
+      text-align: right;
     }
   }
   .not-read {

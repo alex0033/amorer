@@ -18,7 +18,7 @@ RSpec.describe "Jobs", type: :system do
       click_on job.title
     end
     expect(page).to have_current_path job_path(job)
-    expect(page).to have_link("求人広告を変更したい場合はココをクリック")
+    expect(page).to have_link('job_edit_button')
     within(:css, '.header') do
       click_on "アモリル"
     end
@@ -60,7 +60,7 @@ RSpec.describe "Jobs", type: :system do
     sign_in user
     visit job_path(job)
     within(:css, '.main-contents') do
-      click_on "求人広告を変更したい場合はココをクリック"
+      click_on 'job_edit_button'
     end
     title_changed = job.title + "change"
     # 不正な入力
