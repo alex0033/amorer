@@ -1,9 +1,11 @@
 <% flash.each do |key, value| %>
-  <div class="alert alert-<%= bootstrap_alert(key) %>">
-    <div class="container">
-      <strong>
-        <%= value %>
-      </strong>
+  <% unless key == "timedout" %>
+    <div class="alert alert-<%= bootstrap_alert(key) %>">
+      <div class="container">
+        <strong>
+          <%= value %>
+        </strong>
+      </div>
     </div>
-  </div>
+  <% end %>
 <% end %>
