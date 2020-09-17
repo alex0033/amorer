@@ -33,6 +33,7 @@ gem 'rubocop', require: false
 gem 'erb_lint', require: false
 
 gem 'devise'
+gem 'devise-i18n'
 
 gem 'will_paginate'
 gem 'bootstrap-will_paginate'
