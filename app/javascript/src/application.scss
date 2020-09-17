@@ -111,18 +111,23 @@ ul {
 }
 
 // job
-.jobs {
-  a {
-    .job {
-      padding: 10px;
-      border-radius: 10px;
-      background: rgba(176, 242, 75, 0.07);
-      border: 0.3px solid black;
-      height: 250px;
+.jobs-box {
+  .jobs {
+    form {
+      margin-top: 10px;
+      max-height: 310px;
       overflow: hidden;
+      button {
+        width: 100%;
+      }
+      .job {
+        text-align: left;
+        padding: 10px;
+      }
     }
   }
 }
+
 
 // message
 .messages-wrapper {

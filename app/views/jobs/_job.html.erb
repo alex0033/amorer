@@ -1,15 +1,5 @@
-<%= link_to job_path(job), class: "mt-2 col-lg-6" do %>
+<%= button_to job_path(job), class: "mt-2", method: :get do %>
   <div class="job">
-    <div class="job-content">
-      <h3><%= job.title %></h3>
-      発注者：<br>
-      <p><%= job.user.name %></p>
-      <br>
-      報酬：<br>
-      <strong><%= job.pay %></strong><br>
-      <br>
-      説明:
-      <p><%= job.explanation %></p>
-    </div>
+    <%= render 'job_content', job: job, user: job.user %>
   </div>
 <% end %>

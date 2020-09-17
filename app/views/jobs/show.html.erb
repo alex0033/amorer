@@ -1,32 +1,6 @@
 <div class="main-contents col-md-8">
   <div class="job mt-2">
-    <div class="job-content-detail">
-      <h3><%= @job.title %></h3>
-      <div class="card mt-4">
-        <div class="card-header">
-          <strong>発注者</strong>
-        </div>
-        <div class="card-body">
-          <p><%= link_to @user.name, user_path(@user) %></p>
-        </div>
-      </div>
-      <div class="card mt-2">
-        <div class="card-header">
-          <strong>報酬</strong>
-        </div>
-        <div class="card-body">
-          <p><%= @job.pay %></p>
-        </div>
-      </div>
-      <div class="card mt-2">
-        <div class="card-header">
-          <strong>説明</strong>
-        </div>
-        <div class="card-body">
-          <p><%= safe_join(@job.explanation.split("\n"), tag(:br)) %></p>
-        </div>
-      </div>
-    </div>
+    <%= render 'job_content', job: @job, user: @user %>
     <div class="bottom-links mt-4">
       <div id="entry-button" class="entry-button">
         <% if @user == current_user %>
