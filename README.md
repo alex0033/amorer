@@ -35,8 +35,8 @@ URL：https://amorer.herokuapp.com/
 
 ## サンプルユーザーでログイン
 * URL：https://amorer.herokuapp.com/
-* メールアドレス: sample@sample.com
-* パスワード： sample
+* メールアドレス: sample@amorer.com
+* パスワード： password
 
 ## 技術
 * ruby2.7.1
