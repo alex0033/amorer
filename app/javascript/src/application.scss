@@ -10,6 +10,10 @@ p {
   margin-bottom: 0;
 }
 
+button {
+  -webkit-appearance: none;
+}
+
 .main-wrapper {
   .main {
     padding: 30px 0px;
@@ -79,6 +83,7 @@ ul {
     input[type="submit"] {
       width: 64%;
       margin: 20px 18%;
+      -webkit-appearance: none;
     }
     textarea {
       width: 100%;
