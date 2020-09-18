@@ -2,16 +2,16 @@
 @import '~@fortawesome/fontawesome-free/scss/fontawesome';
 
 //universal
+* {
+  -webkit-appearance: none;
+}
+
 a {
   color: black;
 }
 
 p {
   margin-bottom: 0;
-}
-
-button {
-  -webkit-appearance: none;
 }
 
 .main-wrapper {
@@ -83,7 +83,6 @@ ul {
     input[type="submit"] {
       width: 64%;
       margin: 20px 18%;
-      -webkit-appearance: none;
     }
     textarea {
       width: 100%;
@@ -120,7 +119,7 @@ ul {
   .jobs {
     form {
       margin-top: 10px;
-      max-height: 310px;
+      height: 310px;
       overflow: hidden;
       button {
         width: 100%;
