@@ -1,6 +1,5 @@
 <div class="header">
   <div class="container">
-    <!-- どの画面にいるか項目の下に線を引いて見る  -->
     <div class="left">
       <%= link_to "アモリル", root_path, class: "logo" %>
     </div>
@@ -11,7 +10,7 @@
     </div>
     <div class="right dropdown d-sm-none">
       <a class="dropdown-toggle d-sm-none" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        メニュー
+        メニュー<span><%= show_messages_count %></span>
       </a>
       <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
         <%= render 'layouts/right_links', dropdown_item: true %>

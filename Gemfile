@@ -33,9 +33,12 @@ gem 'rubocop', require: false
 gem 'erb_lint', require: false
 
 gem 'devise'
+gem 'devise-i18n'
 
 gem 'will_paginate'
 gem 'bootstrap-will_paginate'
+
+gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'master'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

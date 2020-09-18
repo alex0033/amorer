@@ -16,7 +16,7 @@ RSpec.describe "Devise/Registrations", type: :request do
     end
 
     it { expect(response.status).to eq(302) }
-    it { expect(response).to redirect_to user_path(User.find_by(email: user.email)) }
+    it { expect(response).to redirect_to user_path(User.last) }
   end
 
   describe "#update" do

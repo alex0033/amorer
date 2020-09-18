@@ -1,0 +1,26 @@
+ja:
+  activerecord:
+    models:
+      user: ユーザー
+      job: 求人
+      entry: 応募
+      message: メッセージ
+    attributes:
+      user:
+        name: 名前
+        email: メールアドレス
+        current_password: 現在のパスワード
+        password: パスワード
+        password_confirmation: 確認用パスワード
+        remember_me: ログインを記憶
+        self_introduction: 自己紹介
+      job:
+        title: タイトル
+        pay: 報酬
+        explanation: 説明
+      message:
+        title: タイトル
+        receiver: 受信者
+        sender: 発信者
+        read: 既読かどうか
+        content: 内容

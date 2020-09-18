@@ -194,7 +194,7 @@ RSpec.describe "Jobs", type: :request do
         end
 
         it { expect(response.status).to eq(302) }
-        it { expect(response).to redirect_to job_path(Job.find_by(title: job_built.title)) }
+        it { expect(response).to redirect_to job_path(Job.last) }
         it { expect(Job.find_by(title: job_built.title)).to be_truthy }
       end
 

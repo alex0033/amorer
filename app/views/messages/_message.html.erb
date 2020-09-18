@@ -1,0 +1,9 @@
+<% message_class = "message #{add_background(message.read?)}" %>
+<%= button_to message_path(message), class: message_class, method: :get do %>
+  <div class="message-title">
+    <strong><%= message.title %></strong>
+  </div>
+  <div class="message-date">
+    <p><%= time_ago_in_words(message.created_at) %>前</p>
+  </div>
+<% end %>

@@ -1,0 +1,29 @@
+<div class="main-contents col-md-8">
+  <h2><%= @message.title %></h2>
+  <div class="card mt-4">
+    <div class="card-header">
+      <strong>送信者</strong>
+    </div>
+    <div class="card-body">
+      <p><%= link_to @message.sender.name, user_path(@message.sender) %></p>
+    </div>
+  </div>
+  <div class="card mt-2">
+    <div class="card-header">
+      <strong>受信者</strong>
+    </div>
+    <div class="card-body">
+      <p><%= link_to @message.receiver.name, user_path(@message.receiver) %></p>
+    </div>
+  </div>
+  <div class="card mt-2">
+    <div class="card-header">
+      <strong>内容</strong>
+    </div>
+    <div class="card-body">
+      <% if text = @message.content.presence %>
+        <p><%= safe_join(text.split("\n"), tag(:br)) %><p>
+      <% end %>
+    </div>
+  </div>
+</div>

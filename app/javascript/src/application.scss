@@ -6,6 +6,10 @@ a {
   color: black;
 }
 
+p {
+  margin-bottom: 0;
+}
+
 .main-wrapper {
   .main {
     padding: 30px 0px;
@@ -16,7 +20,6 @@ a {
 }
 
 div.pagination {
-  text-align: center;
   ul {
     margin: 0 auto;
     li {
@@ -27,6 +30,11 @@ div.pagination {
 
 ul {
   list-style: none;
+}
+
+.bottom-links {
+  display: flex;
+  justify-content: space-between;
 }
 
 // header
@@ -41,6 +49,15 @@ ul {
         font-size: 24px;
         font-weight: bold;
         font-style: oblique;
+      }
+    }
+    .right {
+      a {
+        span {
+          background-color: red;
+          color: white;
+          border-radius: 4px;
+        }
       }
     }
   }
@@ -70,12 +87,6 @@ ul {
   }
 }
 
-// user_show
-.self_introduction {
-  border-top: 1px solid lightgray;
-  border-bottom: 1px solid lightgray;
-}
-
 // error
 .field_with_errors {
   display: contents;
@@ -99,21 +110,40 @@ ul {
   }
 }
 
-// jobs
+// job
 .jobs-box {
-
-}
-.jobs {
-  a {
-    .job {
-      padding: 10px;
-      border-radius: 10px;
-      background: rgba(176, 242, 75, 0.07);
-      height: 250px;
+  .jobs {
+    form {
+      margin-top: 10px;
+      max-height: 310px;
       overflow: hidden;
+      button {
+        width: 100%;
+      }
+      .job {
+        text-align: left;
+        padding: 10px;
+      }
     }
   }
 }
-.job-content-detail {
-  border-bottom: 1px solid lightgray
+
+
+// message
+.messages-wrapper {
+  .message {
+    width: 100%;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid black;
+    .message-title {
+      text-align: left;
+    }
+    .message-date {
+      text-align: right;
+    }
+  }
+  .not-read {
+    background: rgba(176, 242, 75, 0.5);
+  }
 }

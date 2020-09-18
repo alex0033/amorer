@@ -60,11 +60,11 @@ RSpec.describe "Entries", type: :system do
     visit job_path(entered_job)
     expect(page).not_to have_selector('body.modal-open')
     expect(page).to have_content("応募ユーザー表示")
-    within(:css, '.job') do
+    within(:css, '#entry-button') do
       click_on "応募ユーザー表示"
     end
     expect(page).to have_selector('body.modal-open')
-    within(:css, '#enter-users-modal') do
+    within(:css, '#entry-users-modal') do
       expect(page).to have_content(user.name)
     end
   end
