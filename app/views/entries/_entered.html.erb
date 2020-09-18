@@ -1,4 +1,5 @@
-<%= link_to "応募中",
-            entry_path(entry),
-            method: :delete,
-            class: "btn btn-outline-secondary" %>
+<%= form_with(model: entry, method: :delete, remote: true) do |f| %>
+  <%= button_tag(class: "btn btn-outline-secondary") do %>
+    <%= content_tag :span, "応募中" %>
+  <% end %>
+<% end %>

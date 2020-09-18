@@ -1,4 +1,6 @@
-<%= link_to "応募する",
-            entries_path(job_id: job.id),
-            method: :post,
-            class: "btn btn-outline-secondary" %>
+<%= form_with(model: job.entries.build, remote: true) do |f| %>
+  <div><%= hidden_field_tag :job_id, job.id %></div>
+  <%= button_tag(class: "btn btn-outline-secondary") do %>
+    <%= content_tag :span, "応募する" %>
+  <% end %>
+<% end %>
