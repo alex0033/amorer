@@ -35,7 +35,7 @@ languages = [
   "C/C++"
 ]
 
-sample_user = User.create!(name: "sample", email: "sample@amorer.com", password: "password")
+sample_user = User.create!(name: "amorer", email: "amorer@amorer.com", password: "ilikeamorer")
 
 u = []
 
