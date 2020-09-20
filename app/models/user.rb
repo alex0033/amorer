@@ -11,6 +11,9 @@ class User < ApplicationRecord
            class_name: "Message",
            foreign_key: "sender_id"
 
+  has_one_attached :image
+  attr_accessor :x, :y, :width, :height
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,

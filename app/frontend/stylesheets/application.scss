@@ -1,5 +1,13 @@
 @import '~bootstrap/scss/bootstrap';
+@import 'cropperjs/dist/cropper.css';
 @import '~@fortawesome/fontawesome-free/scss/fontawesome';
+
+img {
+  display: block;
+
+  /* This rule is very important, please don't ignore this */
+  max-width: 100%;
+}
 
 //universal
 a {
@@ -19,6 +27,16 @@ p {
   }
 }
 
+ul {
+  list-style: none;
+}
+
+.bottom-links {
+  display: flex;
+  justify-content: space-between;
+}
+
+// pagination
 div.pagination {
   ul {
     margin: 0 auto;
@@ -28,13 +46,10 @@ div.pagination {
   }
 }
 
-ul {
-  list-style: none;
-}
-
-.bottom-links {
-  display: flex;
-  justify-content: space-between;
+// cropper circle
+.cropper-view-box,
+.cropper-face {
+  border-radius: 50%;
 }
 
 // header
