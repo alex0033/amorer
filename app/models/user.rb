@@ -12,7 +12,6 @@ class User < ApplicationRecord
            foreign_key: "sender_id"
 
   has_one_attached :image
-  attr_accessor :x, :y, :width, :height
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -25,5 +24,9 @@ class User < ApplicationRecord
 
   def count_not_read_messages
     Message.where(receiver: self).where(read: false).size
+  end
+
+  def show_image
+    image.variant(crop: "#{width}x#{height}+#{x}+#{y}")
   end
 end

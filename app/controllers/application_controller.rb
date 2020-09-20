@@ -7,7 +7,17 @@ class ApplicationController < ActionController::Base
   protected
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:account_update, keys: [:name, :self_introduction])
+      devise_parameter_sanitizer.permit(
+      :account_update,
+      keys: [
+        :name,
+        :self_introduction,
+        :x,
+        :y,
+        :width,
+        :height,
+      ]
+    )
   end
 
   def current_user_check

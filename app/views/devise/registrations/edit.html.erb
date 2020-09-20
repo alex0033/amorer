@@ -8,6 +8,10 @@
       <%= f.label :image, "画像" %>
       <%= f.file_field :image, autofocus: true %>
       <img id="preview">
+      <%= f.hidden_field :x %>
+      <%= f.hidden_field :y %>
+      <%= f.hidden_field :width %>
+      <%= f.hidden_field :height %>
     </div>
 
     <div class="field">

@@ -1,6 +1,8 @@
 import Cropper from 'cropperjs'
 
 $(document).on('turbolinks:load', function() {
+  let cropper;
+
   $('#user_image').on('change', function (e) {
     var reader = new FileReader();
     reader.onload = function (e) {
@@ -10,17 +12,21 @@ $(document).on('turbolinks:load', function() {
   });
 
   $('#preview').on('load', function() {
+    if (typeof cropper !== 'undefined') {
+      console.log(cropper);
+      cropper.destroy();
+    }
+
     let image = document.getElementById('preview');
-    let cropper = new Cropper(image, {
+    cropper = new Cropper(image, {
       aspectRatio: 1 / 1,
       crop(event) {
-        console.log(event.detail.x);
-        console.log(event.detail.y);
-        console.log(event.detail.width);
-        console.log(event.detail.height);
-        console.log(event.detail.rotate);
-        console.log(event.detail.scaleX);
-        console.log(event.detail.scaleY);
+        $('#user_x').val(event.detail.x);
+        $('#user_y').val(event.detail.y);
+        $('#user_width').val(event.detail.width);
+        $('#user_height').val(event.detail.height);
+        console.log($('#user_x').val());
+        console.log($('#user_y').val());
       },
     });
   });

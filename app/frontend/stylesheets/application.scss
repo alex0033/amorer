@@ -165,3 +165,16 @@ div.pagination {
     background: rgba(176, 242, 75, 0.5);
   }
 }
+
+// user
+.user_box {
+  display: flex;
+  align-items: center;
+  .user_image {
+    height: 45px;
+    border-radius: 50%;
+  }
+  h3 {
+    margin-bottom: 0px;
+  }
+}
