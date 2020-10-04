@@ -1,7 +1,8 @@
 class RegistrationsController < Devise::RegistrationsController
   def update
     super
-    @user.image.attach(params[:user][:image])
+    # image = params[:user][:image] || params[:user][:original_image]
+    # @user.image.attach(image)
   end
 
   protected

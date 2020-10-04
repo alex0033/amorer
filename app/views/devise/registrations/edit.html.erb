@@ -5,13 +5,17 @@
     <%= render "devise/shared/error_messages", resource: resource %>
 
     <div class="field">
-      <%= f.label :image, "画像" %>
-      <%= f.file_field :image, autofocus: true %>
+      <%= f.label :image, "画像" %><br>
+      <%= f.file_field :image, autofocus: true, autocomplete: "image", class: "mb-1" %>
+      <% if f.object.image.attached? %>
+        <%= f.hidden_field :original_image, id: "original_image", value: f.object.image.signed_id %>
+        <%= image_tag f.object.show_image, id: "default_preview" %>
+      <% end %>
       <img id="preview">
-      <%= f.hidden_field :x %>
-      <%= f.hidden_field :y %>
-      <%= f.hidden_field :width %>
-      <%= f.hidden_field :height %>
+      <%= f.hidden_field :x, autocomplete: "x" %>
+      <%= f.hidden_field :y, autocomplete: "y" %>
+      <%= f.hidden_field :width, autocomplete: "width" %>
+      <%= f.hidden_field :height, autocomplete: "height" %>
     </div>
 
     <div class="field">

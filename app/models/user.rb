@@ -29,4 +29,8 @@ class User < ApplicationRecord
   def show_image
     image.variant(crop: "#{width}x#{height}+#{x}+#{y}")
   end
+
+  def was_attached?
+    image.attached?
+  end
 end

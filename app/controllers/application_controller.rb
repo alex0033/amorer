@@ -12,6 +12,7 @@ class ApplicationController < ActionController::Base
       keys: [
         :name,
         :self_introduction,
+        :image,
         :x,
         :y,
         :width,
