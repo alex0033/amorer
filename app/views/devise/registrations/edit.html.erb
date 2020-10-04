@@ -3,12 +3,13 @@
 
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
     <%= render "devise/shared/error_messages", resource: resource %>
+    <!-- 後にオブジェクトをリロードするため、ここで値を保持する -->
+    <% user = f.object.dup %>
 
     <div class="field">
       <%= f.label :image, "画像" %><br>
       <%= f.file_field :image, autofocus: true, autocomplete: "image", class: "mb-1" %>
-      <% if f.object.image.attached? %>
-        <%= f.hidden_field :original_image, id: "original_image", value: f.object.image.signed_id %>
+      <% if f.object.reload.image.attached? %>
         <%= image_tag f.object.show_image, id: "default_preview" %>
       <% end %>
       <img id="preview">
@@ -20,17 +21,17 @@
 
     <div class="field">
       <%= f.label :name, "名前" %>
-      <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
+      <%= f.text_field :name, autofocus: true, value: user.name %>
     </div>
 
     <div class="field">
       <%= f.label :email, "メールアドレス" %>
-      <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+      <%= f.email_field :email, autofocus: true, value: user.email %>
     </div>
 
     <div class="field">
       <%= f.label :self_introduction, "自己紹介" %>
-      <%= f.text_area :self_introduction, autofocus: true, autocomplete: "self_introduction" %>
+      <%= f.text_area :self_introduction, autofocus: true, value: user.self_introduction %>
     </div>
 
     <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
