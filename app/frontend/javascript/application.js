@@ -1,5 +1,4 @@
 import Cropper from 'cropperjs'
-console.log("come javascript/application.js");
 
 $(document).on('turbolinks:load', function() {
   let cropper;
