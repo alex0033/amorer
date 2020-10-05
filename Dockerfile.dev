@@ -36,4 +36,4 @@ ADD ./Gemfile.lock Gemfile.lock
 RUN bundle install
 ADD . /amorer
 
-RUN yarn upgrade
+RUN yarn install && yarn upgrade
