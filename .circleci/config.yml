@@ -89,6 +89,7 @@ jobs:
       - run:
           name: Run post-deploy tasks
           command: |
+            heroku config:set AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY_ID=$AWS_SECRET_ACCESS_KEY_ID BUCKET=$APP_NAME --app $APP_NAME
             heroku run --app $APP_NAME rails db:migrate
 
 workflows:
