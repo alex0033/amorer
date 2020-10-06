@@ -10,7 +10,6 @@ require("channels")
 
 import 'bootstrap'
 import '@fortawesome/fontawesome-free/js/all'
-import 'cropperjs'
 import '../stylesheets/application.scss'
 import '../javascript/application.js'
 
