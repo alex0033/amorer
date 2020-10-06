@@ -64,8 +64,7 @@ RSpec.describe "Jobs", type: :request do
           get edit_job_path(other_job)
         end
 
-        it { expect(response.status).to eq(302) }
-        it { expect(response).to redirect_to root_path }
+        it_behaves_like "filter not_correct_user without Ajax"
       end
 
       context "when not signed_in" do
@@ -73,8 +72,7 @@ RSpec.describe "Jobs", type: :request do
           get edit_job_path(job)
         end
 
-        it { expect(response.status).to eq(302) }
-        it { expect(response).to redirect_to new_user_session_path }
+        it_behaves_like "filter not_signed_in_user without Ajax"
       end
     end
 
@@ -109,8 +107,7 @@ RSpec.describe "Jobs", type: :request do
           put job_path(other_job), params: valid_params
         end
 
-        it { expect(response.status).to eq(302) }
-        it { expect(response).to redirect_to root_path }
+        it_behaves_like "filter not_correct_user without Ajax"
         it { expect(Job.find_by(title: job_built.title)).to be_falsy }
       end
 
@@ -119,8 +116,7 @@ RSpec.describe "Jobs", type: :request do
           get edit_job_path(job)
         end
 
-        it { expect(response.status).to eq(302) }
-        it { expect(response).to redirect_to new_user_session_path }
+        it_behaves_like "filter not_signed_in_user without Ajax"
         it { expect(Job.find_by(title: job_built.title)).to be_falsy }
       end
     end
@@ -143,8 +139,7 @@ RSpec.describe "Jobs", type: :request do
           delete job_path(other_job)
         end
 
-        it { expect(response.status).to eq(302) }
-        it { expect(response).to redirect_to root_path }
+        it_behaves_like "filter not_correct_user without Ajax"
         it { expect(Job.find_by(title: job.title)).to be_truthy }
       end
 
@@ -153,8 +148,7 @@ RSpec.describe "Jobs", type: :request do
           delete job_path(job)
         end
 
-        it { expect(response.status).to eq(302) }
-        it { expect(response).to redirect_to new_user_session_path }
+        it_behaves_like "filter not_signed_in_user without Ajax"
         it { expect(Job.find_by(title: job.title)).to be_truthy }
       end
     end
@@ -178,8 +172,7 @@ RSpec.describe "Jobs", type: :request do
         get new_job_path
       end
 
-      it { expect(response.status).to eq(302) }
-      it { expect(response).to redirect_to new_user_session_path }
+      it_behaves_like "filter not_signed_in_user without Ajax"
     end
   end
 
@@ -215,8 +208,7 @@ RSpec.describe "Jobs", type: :request do
         post jobs_path, params: valid_params
       end
 
-      it { expect(response.status).to eq(302) }
-      it { expect(response).to redirect_to new_user_session_path }
+      it_behaves_like "filter not_signed_in_user without Ajax"
       it { expect(Job.find_by(title: job_built.title)).to be_falsy }
     end
   end
