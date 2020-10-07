@@ -1,14 +1,9 @@
 class ApplicationController < ActionController::Base
-  before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :count_messages
 
   after_action :delete_message_cookies, only: :destroy, if: :devise_controller?
 
   protected
-
-  def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:account_update, keys: [:name, :self_introduction])
-  end
 
   def current_user_check
     unless current_user == @user

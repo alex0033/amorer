@@ -10,8 +10,7 @@ RSpec.describe "Entries", type: :request do
         post entries_path, params: { job_id: job.id }, xhr: true
       end
 
-      it { expect(response.status).to eq(200) }
-      it { expect(response).to redirect_to new_user_session_path }
+      it_behaves_like "filter not_signed_in_user with Ajax"
       it { expect(Entry.find_by(user: user, job: job)).to be_falsy }
     end
 
@@ -20,8 +19,7 @@ RSpec.describe "Entries", type: :request do
         post entries_path, params: { job_id: job.id }
       end
 
-      it { expect(response.status).to eq(302) }
-      it { expect(response).to redirect_to new_user_session_path }
+      it_behaves_like "filter not_signed_in_user without Ajax"
       it { expect(Entry.find_by(user: user, job: job)).to be_falsy }
     end
 
@@ -56,8 +54,7 @@ RSpec.describe "Entries", type: :request do
         delete entry_path(entry), xhr: true
       end
 
-      it { expect(response.status).to eq(200) }
-      it { expect(response).to redirect_to new_user_session_path }
+      it_behaves_like "filter not_signed_in_user with Ajax"
       it { expect(Entry.find_by(id: entry.id)).to be_truthy }
     end
 
@@ -66,8 +63,7 @@ RSpec.describe "Entries", type: :request do
         delete entry_path(entry)
       end
 
-      it { expect(response.status).to eq(302) }
-      it { expect(response).to redirect_to new_user_session_path }
+      it_behaves_like "filter not_signed_in_user without Ajax"
       it { expect(Entry.find_by(id: entry.id)).to be_truthy }
     end
 
@@ -79,8 +75,7 @@ RSpec.describe "Entries", type: :request do
         delete entry_path(entry), xhr: true
       end
 
-      it { expect(response.status).to eq(200) }
-      it { expect(response).to redirect_to root_path }
+      it_behaves_like "filter not_correct_user with Ajax"
       it { expect(Entry.find_by(id: entry.id)).to be_truthy }
     end
 
@@ -92,12 +87,11 @@ RSpec.describe "Entries", type: :request do
         delete entry_path(entry)
       end
 
-      it { expect(response.status).to eq(302) }
-      it { expect(response).to redirect_to root_path }
+      it_behaves_like "filter not_correct_user without Ajax"
       it { expect(Entry.find_by(id: entry.id)).to be_truthy }
     end
 
-    context "when signed_in with Ajax" do
+    context "when correct_user with Ajax" do
       before do
         sign_in user
         delete entry_path(entry), xhr: true
@@ -108,7 +102,7 @@ RSpec.describe "Entries", type: :request do
       it { expect(Entry.find_by(id: entry.id)).to be_falsy }
     end
 
-    context "when signed_in without Ajax" do
+    context "when correct_user without Ajax" do
       before do
         sign_in user
         delete entry_path(entry)

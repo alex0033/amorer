@@ -9,8 +9,7 @@ RSpec.describe "Users", type: :request do
         get user_path(user)
       end
 
-      it { expect(response.status).to eq(302) }
-      it { expect(response).to redirect_to new_user_session_path }
+      it_behaves_like "filter not_signed_in_user without Ajax"
     end
 
     context "when user signed_in" do

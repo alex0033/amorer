@@ -43,7 +43,6 @@ RSpec.describe "Devise/Registrations", type: :request do
       user_updated = User.find(user.id)
       expect(user_updated.email).to eq email_changed
       expect(user_updated.name).to eq "after"
-      expect(user_updated.name).to eq "after"
     end
   end
 end
