@@ -38,17 +38,18 @@ class User < ApplicationRecord
 
   def self.from_omniauth(access_token)
     data = access_token.info
-    user = User.where(email: data['email']).first
-
-    # Uncomment the section below if you want users to be created if they don't exist
-    unless user
-        user = User.create(
-          name: data['name'],
-          email: data['email'],
-          password: Devise.friendly_token[0,20]
-        )
+    provider = access_token['provider']
+    uid = access_token['uid']
+    if user = User.where(provider: provider, uid: uid).first
+      return user
     end
-    user
+    User.create(
+      name: data['name'],
+      email: data['email'],
+      password: Devise.friendly_token[0, 20],
+      provider: provider,
+      uid: uid,
+    )
   end
 
   def count_not_read_messages
@@ -67,6 +68,7 @@ class User < ApplicationRecord
     !has_auth?
   end
 
+  # 下記　authはproviderとuidを示す。
   def has_auth?
     provider.present? && uid.present?
   end
@@ -76,7 +78,7 @@ class User < ApplicationRecord
   end
 
   def can_auth?
-    unless has_auth? || auth_is_complete_nil?
+    if !(has_auth? || auth_is_complete_nil?)
       errors.add(:base, "認証エラーが発生しています")
     end
   end

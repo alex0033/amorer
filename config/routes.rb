@@ -4,10 +4,10 @@ Rails.application.routes.draw do
   get 'policy', to: 'basic_pages#policy'
   devise_for :users, controllers: {
     registrations: :registrations,
-    omniauth_callbacks: :omniauth_callbacks
+    omniauth_callbacks: :omniauth_callbacks,
   }
-  resources :users,    only: :show
+  resources :users, only: :show
   resources :jobs
-  resources :entries,  only: [:create, :destroy]
+  resources :entries, only: [:create, :destroy]
   resources :messages, only: [:index, :new, :create, :show]
 end
