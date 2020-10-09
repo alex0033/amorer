@@ -3,7 +3,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
-         :timeoutable, :omniauthable, omniauth_providers: [:google_oauth2, :facebook]
+         :timeoutable, :omniauthable, omniauth_providers: [:facebook]
 
   has_many :jobs,    dependent: :destroy
   has_many :entries, dependent: :destroy
@@ -25,6 +25,17 @@ class User < ApplicationRecord
   validates :image, content_type: ['image/png', 'image/jpg', 'image/jpeg'],
                     size: { less_than: 5.megabytes, message: 'のデータサイズが大きすぎます' }
 
+  validates :provider, uniqueness: { scope: :uid, case_sensitive: true }, allow_nil: true
+
+  with_options presence: true, if: :was_attached? do
+    validates :x
+    validates :y
+    validates :height
+    validates :width
+  end
+
+  validate :can_auth?
+
   def self.from_omniauth(access_token)
     data = access_token.info
     user = User.where(email: data['email']).first
@@ -40,13 +51,6 @@ class User < ApplicationRecord
     user
   end
 
-  with_options presence: true, if: :was_attached? do
-    validates :x
-    validates :y
-    validates :height
-    validates :width
-  end
-
   def count_not_read_messages
     Message.where(receiver: self).where(read: false).size
   end
@@ -57,5 +61,23 @@ class User < ApplicationRecord
 
   def was_attached?
     image.attached?
+  end
+
+  def email_required?
+    !has_auth?
+  end
+
+  def has_auth?
+    provider.present? && uid.present?
+  end
+
+  def auth_is_complete_nil?
+    provider.nil? && uid.nil?
+  end
+
+  def can_auth?
+    unless has_auth? || auth_is_complete_nil?
+      errors.add(:base, "認証エラーが発生しています")
+    end
   end
 end
