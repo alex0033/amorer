@@ -38,24 +38,6 @@
       <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
     <% end %>
 
-    <div class="field">
-      <%= f.label :password, "新しいパスワード" %> <i>(変更したい場合のみ)</i>
-      <%= f.password_field :password, autocomplete: "new-password" %>
-      <% if @minimum_password_length %>
-        <em>最小 <%= @minimum_password_length %> 文字から</em>
-      <% end %>
-    </div>
-
-    <div class="field">
-      <%= f.label "新しいパスワード(確認)" %>
-      <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-    </div>
-
-    <div class="field">
-      <%= f.label :current_password, "今のパスワード" %> <i>(変更したい場合、入力してください)</i>
-      <%= f.password_field :current_password, autocomplete: "current-password" %>
-    </div>
-
     <div class="actions">
       <%= f.submit "更新", id: "user_update_button" %>
     </div>

@@ -76,5 +76,38 @@ RSpec.describe User, type: :model do
 
       it { expect(user.valid?).to be false }
     end
+
+    # 以下、外部API連携によるユーザ
+    context "when email:ok, provider:ok, uid: ok" do
+      let(:user) { build(:user_with_facebook) }
+
+      it { expect(user.valid?). to be true }
+    end
+
+    context "when email:nil, provider:ok, uid:ok" do
+      let(:user) { build(:user_with_facebook, email: nil) }
+
+      it { expect(user.valid?). to be true }
+    end
+
+    context "when email:ok, provider:nil, uid: ok" do
+      let(:user) { build(:user_with_facebook, provider: nil) }
+
+      it { expect(user.valid?). to be false }
+    end
+
+    context "when email:ok, provider:ok, uid: nil" do
+      let(:user) { build(:user_with_facebook, uid: nil) }
+
+      it { expect(user.valid?). to be false }
+    end
+
+    context "when duplicate combination of provider and uid" do
+      let(:user) { build(:user_with_facebook, uid: uid) }
+      let!(:duplicate_user) { create(:user_with_facebook, uid: uid) }
+      let(:uid) { "same_uid" }
+
+      it { expect(user.valid?). to be false }
+    end
   end
 end

@@ -1,5 +1,13 @@
 class RegistrationsController < Devise::RegistrationsController
-  before_action :configure_permitted_parameters
+  # パスワードなしで、変更できるようにカスタマイズ
+  def update
+    if @user.update(edit_params)
+      flash[:notice] = "ユーザー情報を編集しました"
+      redirect_to @user
+    else
+      render 'devise/registrations/edit'
+    end
+  end
 
   protected
 
@@ -11,18 +19,16 @@ class RegistrationsController < Devise::RegistrationsController
     user_path(resource)
   end
 
-  def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(
-      :account_update,
-      keys: [
-        :name,
-        :self_introduction,
-        :image,
-        :x,
-        :y,
-        :width,
-        :height,
-      ]
+  def edit_params
+    params.require(:user).permit(
+      :name,
+      :email,
+      :self_introduction,
+      :image,
+      :x,
+      :y,
+      :width,
+      :height
     )
   end
 end
