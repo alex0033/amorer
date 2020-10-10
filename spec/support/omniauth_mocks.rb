@@ -9,12 +9,12 @@ module OmniauthMocks
         first_name: 'Joe',
         last_name: 'Bloggs',
         image: 'http://graph.facebook.com/1234567/picture?type=square',
-        verified: true
+        verified: true,
       },
       credentials: {
-        token: 'ABCDEF...', # OAuth 2.0 access_token, which you may wish to store
-        expires_at: 1321747205, # when the access token expires (it always will)
-        expires: true # this will always be true
+        token: 'ABCDEF...',
+        expires_at: 1321747205,
+        expires: true,
       },
       extra: {
         raw_info: {
@@ -30,9 +30,9 @@ module OmniauthMocks
           timezone: -8,
           locale: 'en_US',
           verified: true,
-          updated_time: '2011-11-11T06:21:03+0000'
-        }
-      }
+          updated_time: '2011-11-11T06:21:03+0000',
+        },
+      },
     })
   end
 
@@ -46,12 +46,12 @@ module OmniauthMocks
         first_name: 'Joe',
         last_name: 'Bloggs',
         image: 'http://graph.facebook.com/1234567/picture?type=square',
-        verified: true
+        verified: true,
       },
       credentials: {
-        token: 'ABCDEF...', # OAuth 2.0 access_token, which you may wish to store
-        expires_at: 1321747205, # when the access token expires (it always will)
-        expires: true # this will always be true
+        token: 'ABCDEF...',
+        expires_at: 1321747205,
+        expires: true,
       },
       extra: {
         raw_info: {
@@ -67,9 +67,9 @@ module OmniauthMocks
           timezone: -8,
           locale: 'en_US',
           verified: true,
-          updated_time: '2011-11-11T06:21:03+0000'
-        }
-      }
+          updated_time: '2011-11-11T06:21:03+0000',
+        },
+      },
     })
   end
 end

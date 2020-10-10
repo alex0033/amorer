@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe "Devise/Registrations", type: :system do
   let!(:user) { create(:user) }
   let!(:new_user) { build(:user) }
+  let(:user_with_facebook) { build(:user_with_facebook) }
   let(:password) { "password" }
   let(:user_with_image_info) { create(:user, x: 0, y: 0, width: 50, height: 50) }
   let(:first_image_path) { 'spec/factories/file_data/jpg_file.jpg' }
@@ -32,6 +33,28 @@ RSpec.describe "Devise/Registrations", type: :system do
     end
     expect(page).to have_selector '.alert-success'
     expect(page).to have_current_path user_path(User.find_by(email: new_user.email))
+  end
+
+  it "make user with facebook" do
+    facebook_mock(user_with_facebook)
+    # ここまでの経路は"make user"で確認済み"
+    visit new_user_registration_path
+    expect do
+      click_on 'faceboook_login_button'
+    end.to change(User, :count).by(1)
+    expect(page).to have_selector '.alert-success'
+    expect(page).to have_current_path user_path(User.find_by(email: user_with_facebook.email))
+  end
+
+  it "cannot make user with facebook" do
+    facebook_invalid_mock(user_with_facebook)
+    # ここまでの経路は"make user"で確認済み"
+    visit new_user_registration_path
+    expect do
+      click_on 'faceboook_login_button'
+    end.to change(User, :count).by(0)
+    expect(page).to have_selector '.alert-warning'
+    expect(page).to have_current_path new_user_registration_path
   end
 
   it "update user" do

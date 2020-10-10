@@ -6,7 +6,7 @@ RSpec.describe "OmniauthCallbacks", type: :request do
       let(:user) { create(:user_with_facebook) }
 
       before do
-        Rails.application.env_config['omniauth.auth'] = facebook_mock(user)
+        facebook_mock(user)
         get user_facebook_omniauth_callback_path
       end
 
@@ -18,7 +18,7 @@ RSpec.describe "OmniauthCallbacks", type: :request do
       let(:user) { build(:user_with_facebook) }
 
       before do
-        Rails.application.env_config['omniauth.auth'] = facebook_mock(user)
+        facebook_mock(user)
         get user_facebook_omniauth_callback_path
       end
 
@@ -30,7 +30,7 @@ RSpec.describe "OmniauthCallbacks", type: :request do
       let(:user) { build(:user_with_facebook) }
 
       before do
-        Rails.application.env_config['omniauth.auth'] = facebook_invalid_mock(user)
+        facebook_invalid_mock(user)
         get user_facebook_omniauth_callback_path
       end
 
