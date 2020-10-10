@@ -68,9 +68,14 @@ jobs:
           command: |
             if [ $CIRCLE_BRANCH == master ]; then
               echo "export APP_NAME=amorer" >> $BASH_ENV
+              echo "export FACEBOOK_APP_ID=$FACEBOOK_APP_ID" >> $BASH_ENV
+              echo "export FACEBOOK_APP_SECRET=$FACEBOOK_APP_SECRET" >> $BASH_ENV
             else
               echo "export APP_NAME=amorer-sample" >> $BASH_ENV
+              echo "export FACEBOOK_APP_ID=$SAMPLE_FACEBOOK_APP_ID" >> $BASH_ENV
+              echo "export FACEBOOK_APP_SECRET=$SAMPLE_FACEBOOK_APP_SECRET" >> $BASH_ENV
             fi
+            heroku git:remote -a $APP_NAME
       - run:
           name: Deploy
           command: |
@@ -78,19 +83,20 @@ jobs:
       - run:
           name: Set database, if necessary
           command: |
-            if [ -z `heroku config:get JAWSDB_URL --app $APP_NAME` ]; then
-              heroku addons:create jawsdb --app $APP_NAME
-              DATABASE_URL=`heroku config:get JAWSDB_URL --app $APP_NAME`
+            if [ -z `heroku config:get JAWSDB_URL` ]; then
+              heroku addons:create jawsdb
+              DATABASE_URL=`heroku config:get JAWSDB_URL`
               DATABASE_URL2=${DATABASE_URL/mysql/mysql2}
-              heroku config:set DATABASE_URL=$DATABASE_URL2 --app $APP_NAME
+              heroku config:set DATABASE_URL=$DATABASE_URL2
             else
               echo "Database has been already set."
             fi
       - run:
           name: Run post-deploy tasks
           command: |
-            heroku config:set AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY_ID=$AWS_SECRET_ACCESS_KEY_ID BUCKET=$APP_NAME --app $APP_NAME
-            heroku run --app $APP_NAME rails db:migrate
+            heroku config:set AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY_ID=$AWS_SECRET_ACCESS_KEY_ID BUCKET=$APP_NAME
+            heroku config:set FACEBOOK_APP_ID=$FACEBOOK_APP_ID FACEBOOK_APP_SECRET=$FACEBOOK_APP_SECRET
+            heroku run rails db:migrate
 
 workflows:
   version: 2.1
