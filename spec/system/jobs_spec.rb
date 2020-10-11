@@ -39,7 +39,9 @@ RSpec.describe "Jobs", type: :system do
     # 不正な入力
     within(:css, '.form-box') do
       fill_in('job_title', with: "")
-      fill_in('job_pay', with: "10000yen per hour")
+      select("時給", from: "報酬")
+      fill_in('job_reward_min_amount', with: 1000)
+      fill_in('job_reward_max_amount', with: 1300)
       fill_in('job_explanation', with: "It is very good")
       click_on 'job_create_button'
       expect(page).to have_selector 'h2', text: "求人作成"
@@ -48,7 +50,9 @@ RSpec.describe "Jobs", type: :system do
     # 正しい入力
     within(:css, '.form-box') do
       fill_in('job_title', with: "Job Title")
-      fill_in('job_pay', with: "10000yen per hour")
+      select("時給", from: "報酬")
+      fill_in('job_reward_min_amount', with: 1000)
+      fill_in('job_reward_max_amount', with: 1300)
       fill_in('job_explanation', with: "It is very good")
       click_on "作成"
     end
@@ -66,7 +70,9 @@ RSpec.describe "Jobs", type: :system do
     # 不正な入力
     within(:css, '.form-box') do
       fill_in('job_title', with: title_changed)
-      fill_in('job_pay', with: "1000 yen/hour")
+      select("時給", from: "報酬")
+      fill_in('job_reward_min_amount', with: job.reward_min_amount)
+      fill_in('job_reward_max_amount', with: job.reward_max_amount)
       fill_in('job_explanation', with: "")
       click_on 'job_update_button'
       expect(page).to have_selector 'h2', text: "求人編集"
@@ -75,7 +81,9 @@ RSpec.describe "Jobs", type: :system do
     # 正しい入力
     within(:css, '.form-box') do
       fill_in('job_title', with: title_changed)
-      fill_in('job_pay', with: "1000 yen/hour")
+      select("時給", from: "報酬")
+      fill_in('job_reward_min_amount', with: job.reward_min_amount)
+      fill_in('job_reward_max_amount', with: job.reward_max_amount)
       fill_in('job_explanation', with: "valid explanation")
       click_on 'job_update_button'
     end

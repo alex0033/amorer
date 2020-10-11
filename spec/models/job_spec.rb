@@ -37,6 +37,24 @@ RSpec.describe Job, type: :model do
     it { expect(job.valid?).to be false }
   end
 
+  context "when reward_min_amount is nil" do
+    let(:job) { build(:job, reward_min_amount: nil) }
+
+    it "reward_max_amount == reward_min_amount" do
+      expect(job.save).to be true
+      expect(job.reward_min_amount).to eq job.reward_max_amount
+    end
+  end
+
+  context "when reward_max_amount is nil" do
+    let(:job) { build(:job, reward_max_amount: nil) }
+
+    it "reward_max_amount == reward_min_amount" do
+      expect(job.save).to be true
+      expect(job.reward_min_amount).to eq job.reward_max_amount
+    end
+  end
+
   context "when explanation is blank" do
     let(:job) { build(:job, explanation: " ") }
 

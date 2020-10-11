@@ -5,7 +5,7 @@ class JobsController < ApplicationController
 
   def index
     @q = Job.ransack(params[:q])
-    @jobs = @q.result.page(params[:page])
+    @jobs = @q.result.order(created_at: :desc).includes(:user).page(params[:page])
   end
 
   def new

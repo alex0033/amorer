@@ -57,8 +57,8 @@ RSpec.describe "Jobs", type: :request do
           get jobs_path, params: {
             q: {
               reward_type: 1,
-              reward_min_amount_lteq: 1200,
-              reward_max_amount_gteq: 1400,
+              reward_min_amount_gteq: 1000,
+              reward_max_amount_lteq: 2100,
             },
           }
         end
@@ -73,8 +73,8 @@ RSpec.describe "Jobs", type: :request do
           get jobs_path, params: {
             q: {
               reward_type: 1,
-              reward_min_amount_lteq: 1800,
-              reward_max_amount_gteq: 2100,
+              reward_min_amount_gteq: 1300,
+              reward_max_amount_lteq: 1500,
             },
           }
         end
