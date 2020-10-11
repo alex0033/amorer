@@ -1,5 +1,5 @@
 class Job < ApplicationRecord
-  before_save :align_reward
+  before_save :organize_reward_amount
 
   belongs_to :user
   has_many :entries, dependent: :destroy
@@ -19,6 +19,21 @@ class Job < ApplicationRecord
 
   def is_entered_by(user)
     Entry.find_by(user: user, job: self)
+  end
+
+  private
+
+  def organize_reward_amount
+    make_reward_nil || align_reward
+  end
+
+  def make_reward_nil
+    if reward_type == 4
+      self.reward_min_amount = nil
+      self.reward_max_amount = nil
+      return true
+    end
+    return false
   end
 
   def align_reward

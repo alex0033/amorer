@@ -37,6 +37,16 @@ RSpec.describe Job, type: :model do
     it { expect(job.valid?).to be false }
   end
 
+  context "when reward_type is 4 and reward_amount is not nil" do
+    let(:job) { build(:job, reward_type: 4) }
+
+    it "makes reward_max_amount and reward_min_amount nil" do
+      expect(job.save).to be true
+      expect(job.reward_min_amount).to be_nil
+      expect(job.reward_min_amount).to be_nil
+    end
+  end
+
   context "when reward_min_amount is nil" do
     let(:job) { build(:job, reward_min_amount: nil) }
 
