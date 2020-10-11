@@ -33,7 +33,7 @@ class Job < ApplicationRecord
       self.reward_max_amount = nil
       return true
     end
-    return false
+    false
   end
 
   def align_reward

@@ -13,7 +13,7 @@
       <%= f.label :reward_type, "報酬" %>
       <%= f.select :reward_type,
                    { "時給": 1, "日給": 2, "成果報酬": 3, "要相談": 4 },
-                                 { include_blank: "選択してください" } %>
+                   { include_blank: "選択してください" } %>
       <br>
       <%= f.number_field :reward_min_amount %>
       円　〜

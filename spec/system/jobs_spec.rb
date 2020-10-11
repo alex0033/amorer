@@ -102,4 +102,65 @@ RSpec.describe "Jobs", type: :system do
     expect(page).to have_selector '.alert-success'
     expect(page).to have_current_path root_path
   end
+
+  describe "search jobs" do
+    let!(:job_other_amount) do
+      create(:job, reward_min_amount: 1700, reward_max_amount: 2500)
+    end
+    let!(:job_type2) { create(:job, reward_type: 2) }
+
+    before do
+      visit root_path
+    end
+
+    scenario "search keywords" do
+      # job.titleで検索
+      within(:css, '.form-box') do
+        fill_in('q_title_or_explanation_cont', with: job.title)
+        click_on 'search_button'
+      end
+      expect(page).to have_content job.title
+      expect(page).not_to have_content job_other_amount.title
+      expect(page).not_to have_content job_type2.title
+      # job_type2.titleで検索
+      within(:css, '.form-box') do
+        fill_in('q_title_or_explanation_cont', with: job_type2.title)
+        click_on 'search_button'
+      end
+      expect(page).not_to have_content job.title
+      expect(page).not_to have_content job_other_amount.title
+      expect(page).to have_content job_type2.title
+    end
+
+    scenario "search type1" do
+      select "時給", from: "報酬"
+      # 1000~2500円で検索
+      within(:css, '.form-box') do
+        fill_in('q_reward_min_amount_gteq', with: 1000)
+        fill_in('q_reward_max_amount_lteq', with: 2500)
+        click_on 'search_button'
+      end
+      expect(page).to have_content job.title
+      expect(page).to have_content job_other_amount.title
+      expect(page).not_to have_content job_type2.title
+      # 900~2100円で検索
+      within(:css, '.form-box') do
+        fill_in('q_reward_min_amount_gteq', with: 1000)
+        fill_in('q_reward_max_amount_lteq', with: 2100)
+        click_on 'search_button'
+      end
+      expect(page).to have_content job.title
+      expect(page).not_to have_content job_other_amount.title
+      expect(page).not_to have_content job_type2.title
+      # 1500円~で検索
+      within(:css, '.form-box') do
+        fill_in('q_reward_min_amount_gteq', with: 1500)
+        fill_in('q_reward_max_amount_lteq', with: nil)
+        click_on 'search_button'
+      end
+      expect(page).not_to have_content job.title
+      expect(page).to have_content job_other_amount.title
+      expect(page).not_to have_content job_type2.title
+    end
+  end
 end

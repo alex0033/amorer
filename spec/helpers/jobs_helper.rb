@@ -2,11 +2,11 @@ require 'rails_helper'
 
 RSpec.describe JobsHelper do
   describe "show_reward(job)" do
+    subject { show_reward(job) }
+
     let(:type1) { "時給" }
     let(:type2) { "日給" }
     let(:type3) { "成果報酬" }
-
-    subject { show_reward(job) }
 
     def build_job(type: reward_type, min: min_amount, max: max_amount)
       build(

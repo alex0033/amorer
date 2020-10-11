@@ -9,14 +9,14 @@
         <%= f.label :reward_type_eq, "報酬" %>
         <%= f.select :reward_type_eq,
                      { "時給": 1, "日給": 2, "成果報酬": 3 },
-                                   { include_blank: "選択してください" } %>
+                     { include_blank: "選択してください" } %>
         <br>
         <%= f.number_field :reward_min_amount_gteq %>
         円〜
         <%= f.number_field :reward_max_amount_lteq %>
         円
       </div>
-      <%= f.submit "検索" %>
+      <%= f.submit "検索", id: "search_button" %>
     <% end %>
   </div>
   <div class="jobs-box my-5">
