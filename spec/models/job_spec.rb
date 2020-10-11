@@ -25,14 +25,14 @@ RSpec.describe Job, type: :model do
     it { expect(job.valid?).to be false }
   end
 
-  context "when pay is blank" do
-    let(:job) { build(:job, title: " ") }
+  context "when pay is too long" do
+    let(:job) { build(:job, title: "a" * 31) }
 
     it { expect(job.valid?).to be false }
   end
 
-  context "when pay is too long" do
-    let(:job) { build(:job, title: "a" * 31) }
+  context "when reward_type is nil" do
+    let(:job) { build(:job, reward_type: nil) }
 
     it { expect(job.valid?).to be false }
   end

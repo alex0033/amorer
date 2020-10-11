@@ -4,7 +4,8 @@ class Job < ApplicationRecord
   has_many :entry_users, through: :entries, source: :user
 
   validates :title,       presence: true, length: { maximum: 30 }
-  validates :pay,         presence: true, length: { maximum: 30 }
+  validates :pay,         length: { maximum: 30 }
+  validates :reward_type, presence: true
   validates :explanation, presence: true, length: { maximum: 2000 }
 
   def self.search(search)

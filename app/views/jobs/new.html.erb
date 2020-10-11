@@ -10,8 +10,15 @@
     </div>
 
     <div class="field">
-      <%= f.label :pay, "報酬 (30文字以内)" %>
-      <%= f.text_field :pay, autocomplete: "pay" %>
+      <%= f.label :reward_type, "報酬" %>
+      <%= f.select :reward_type,
+                   { "時給": 1, "日給": 2, "単発報酬": 3, "要相談": 4 },
+                                 { include_blank: "選択してください" } %>
+      <br>
+      <%= f.number_field :reward_min_amount %>
+      円　〜
+      <%= f.number_field :reward_max_amount %>
+      円
     </div>
 
     <div class="field">
