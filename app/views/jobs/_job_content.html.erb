@@ -4,8 +4,8 @@
     <div class="card-header">
       <strong>発注者</strong>
     </div>
-    <div class="card-body">
-      <p><%= link_to job.user.name, user_path(job.user) %></p>
+    <div class="card-body user-box">
+      <%= render 'shared/mini_user', user: job.user %>
     </div>
   </div>
   <div class="card mt-2">
@@ -13,7 +13,11 @@
       <strong>報酬</strong>
     </div>
     <div class="card-body">
-      <p><%= job.pay %></p>
+      <% if job.reward_type.present? %>
+        <p><%= show_reward(job) %></p>
+      <% else %>
+        <p><%= job.pay %></p>
+      <% end %>
     </div>
   </div>
   <div class="card mt-2">

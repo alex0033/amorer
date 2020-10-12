@@ -25,16 +25,44 @@ RSpec.describe Job, type: :model do
     it { expect(job.valid?).to be false }
   end
 
-  context "when pay is blank" do
-    let(:job) { build(:job, title: " ") }
-
-    it { expect(job.valid?).to be false }
-  end
-
   context "when pay is too long" do
     let(:job) { build(:job, title: "a" * 31) }
 
     it { expect(job.valid?).to be false }
+  end
+
+  context "when reward_type is nil" do
+    let(:job) { build(:job, reward_type: nil) }
+
+    it { expect(job.valid?).to be false }
+  end
+
+  context "when reward_type is 4 and reward_amount is not nil" do
+    let(:job) { build(:job, reward_type: 4) }
+
+    it "makes reward_max_amount and reward_min_amount nil" do
+      expect(job.save).to be true
+      expect(job.reward_min_amount).to be_nil
+      expect(job.reward_min_amount).to be_nil
+    end
+  end
+
+  context "when reward_min_amount is nil" do
+    let(:job) { build(:job, reward_min_amount: nil) }
+
+    it "reward_max_amount == reward_min_amount" do
+      expect(job.save).to be true
+      expect(job.reward_min_amount).to eq job.reward_max_amount
+    end
+  end
+
+  context "when reward_max_amount is nil" do
+    let(:job) { build(:job, reward_max_amount: nil) }
+
+    it "reward_max_amount == reward_min_amount" do
+      expect(job.save).to be true
+      expect(job.reward_min_amount).to eq job.reward_max_amount
+    end
   end
 
   context "when explanation is blank" do

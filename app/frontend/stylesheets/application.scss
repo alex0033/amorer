@@ -20,7 +20,7 @@ p {
 
 .main-wrapper {
   .main {
-    padding: 30px 0px;
+    padding: 40px 0px;
     .main-contents {
       margin: 20px auto;
     }
@@ -88,7 +88,10 @@ div.pagination {
     label {
       margin-top: 20px;
     }
-    input[type="email"], input[type="password"], input[type="text"] {
+    input[type="email"],
+    input[type="password"],
+    input[type="text"],
+    input[type="search"] {
       width: 100%;
     }
     input[type="submit"] {
@@ -170,11 +173,15 @@ div.pagination {
 }
 
 // user
-.user_box {
+.user-box {
   display: flex;
   align-items: center;
-  .user_image {
+  .user-image {
     height: 45px;
+    border-radius: 50%;
+  }
+  .mini-user-image {
+    height: 30px;
     border-radius: 50%;
   }
   h3 {

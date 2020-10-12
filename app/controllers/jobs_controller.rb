@@ -4,7 +4,8 @@ class JobsController < ApplicationController
   before_action :current_user_check, only: [:edit, :update, :destroy]
 
   def index
-    @jobs = Job.search(params[:search]).includes(:user).paginate(page: params[:page])
+    @q = Job.ransack(params[:q])
+    @jobs = @q.result.order(created_at: :desc).includes(:user).page(params[:page])
   end
 
   def new
@@ -46,7 +47,13 @@ class JobsController < ApplicationController
   private
 
   def job_params
-    params.require(:job).permit(:title, :pay, :explanation)
+    params.require(:job).permit(
+      :title,
+      :reward_type,
+      :reward_min_amount,
+      :reward_max_amount,
+      :explanation,
+    )
   end
 
   def set_user_and_job

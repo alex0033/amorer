@@ -1,0 +1,2 @@
+<%= image_tag user.show_image, class: "mini-user-image" if user.image.attached? %>
+<p><%= link_to user.name, user_path(user), class: "ml-2" %></p>

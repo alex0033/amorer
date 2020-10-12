@@ -1,12 +1,12 @@
 <div class="main-contents col-md-8">
   <div class="card">
-    <div class="card-header user_box">
-      <%= image_tag @user.show_image, class: "user_image" if @user.image.attached? %>
+    <div class="card-header user-box">
+      <%= image_tag @user.show_image, class: "user-image" if @user.image.attached? %>
       <h3 class="ml-2"><%= @user.name %></h3>
     </div>
     <div class="card-body">
       <% if text = @user.self_introduction.presence %>
-        <p><%= safe_join(text.split("\n"), tag(:br)) %><p>
+        <p><%= safe_join(text.split("\n"), tag(:br)) %></p>
       <% else %>
         <p>自己紹介が未入力です。</p>
       <% end %>

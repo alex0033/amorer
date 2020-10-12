@@ -6,7 +6,9 @@ RSpec.describe "Jobs", type: :request do
     {
       job: {
         title: job_built.title,
-        pay: job_built.pay,
+        reward_type: job_built.reward_type,
+        reward_min_amount: job_built.reward_min_amount,
+        reward_max_amount: job_built.reward_max_amount,
         explanation: job_built.explanation,
       },
     }
@@ -15,26 +17,72 @@ RSpec.describe "Jobs", type: :request do
     {
       job: {
         title: job_built.title,
-        pay: "",
+        reward_type: nil,
+        reward_min_amount: job_built.reward_min_amount,
+        reward_max_amount: job_built.reward_max_amount,
         explanation: job_built.explanation,
       },
     }
   end
 
   describe "created_data needed(#index #show #edit #destroy)" do
-    let!(:user) { create(:user) }
+    let(:user) { create(:user) }
     let(:other_user) { create(:user) }
     let!(:job) { create(:job, user: user) }
     let!(:other_job) { create(:job, user: other_user) }
 
     describe "#index" do
-      before do
-        get jobs_path
+      context "when keyword is nil" do
+        before do
+          get jobs_path
+        end
+
+        it { expect(response.status).to eq(200) }
+        it { expect(response.body).to include(job.title) }
+        it { expect(response.body).to include(other_job.title) }
       end
 
-      it { expect(response.status).to eq(200) }
-      it { expect(response.body).to include(job.title) }
-      it { expect(response.body).to include(other_job.title) }
+      context "when keyword is job.title" do
+        before do
+          get jobs_path, params: { q: { title_or_explanation_cont: job.title } }
+        end
+
+        it { expect(response.status).to eq(200) }
+        it { expect(response.body).to include(job.title) }
+        it { expect(response.body).not_to include(other_job.title) }
+      end
+
+      context "when reward is 1200yen ~ 1400yen" do
+        before do
+          get jobs_path, params: {
+            q: {
+              reward_type: 1,
+              reward_min_amount_gteq: 1000,
+              reward_max_amount_lteq: 2100,
+            },
+          }
+        end
+
+        it { expect(response.status).to eq(200) }
+        it { expect(response.body).to include(job.title) }
+        it { expect(response.body).to include(other_job.title) }
+      end
+
+      context "when reward is 1800yen ~ 2000yen" do
+        before do
+          get jobs_path, params: {
+            q: {
+              reward_type: 1,
+              reward_min_amount_gteq: 1300,
+              reward_max_amount_lteq: 1500,
+            },
+          }
+        end
+
+        it { expect(response.status).to eq(200) }
+        it { expect(response.body).not_to include(job.title) }
+        it { expect(response.body).not_to include(other_job.title) }
+      end
     end
 
     describe "#show" do

@@ -46,11 +46,16 @@ end
 10.times do |n|
   like = likes.sample
   sentence = sentences.sample
-  money_part = (12..25).to_a.sample
+  money_part = (12..20).to_a.sample
+  plus = (0..10).to_a.sample
+  min_amount = money_part * 100
+  max_amount = min_amount + plus * 100
   language = languages.sample
   u[n].jobs.create!(
     title: like + sentence,
-    pay: "#{money_part}00円/時間",
+    reward_type: 1,
+    reward_min_amount: min_amount,
+    reward_max_amount: max_amount,
     explanation: "【仕事内容】
       ・#{language}を用いた開発、保守・運用をしていただきます。
       ・#{like}の未来を一緒に考えましょう。
@@ -87,7 +92,9 @@ money_part = (12..25).to_a.sample
 language = languages.sample
 sample_job = sample_user.jobs.create!(
   title: like + sentence,
-  pay: "#{money_part}00円/時間",
+  reward_type: 1,
+  reward_min_amount: 1500,
+  reward_max_amount: 2000,
   explanation: "【仕事内容】
     ・#{language}を用いた開発、保守・運用をしていただきます。
     ・#{like}の未来を一緒に考えましょう。
