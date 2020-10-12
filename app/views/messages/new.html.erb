@@ -10,7 +10,9 @@
 
     <div class="field">
       <%= f.label :receiver, "送る相手" %><br>
-      <%= @receiver.name %>
+      <div class="user-box">
+        <%= render 'shared/mini_user', user: @receiver %>
+      </div>
       <%= hidden_field_tag :receiver_id, @receiver.id %>
     </div>
 

@@ -173,11 +173,15 @@ div.pagination {
 }
 
 // user
-.user_box {
+.user-box {
   display: flex;
   align-items: center;
-  .user_image {
+  .user-image {
     height: 45px;
+    border-radius: 50%;
+  }
+  .mini-user-image {
+    height: 30px;
     border-radius: 50%;
   }
   h3 {
