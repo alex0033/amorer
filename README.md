@@ -1,6 +1,7 @@
 # アモリル
 - [アモリルとは](#アモリルとは)
-- [サンプルユーザーでログイン](#サンプルユーザーでログイン)
+- [サンプルユーザーでemailログイン](#サンプルユーザーでemailログイン)
+- [サンプルユーザーでfacebookログイン](#サンプルユーザーでfacebookログイン)
 - [技術](#技術)
 - [機能一覧](#機能一覧)
 - [感想](#感想)
@@ -24,7 +25,7 @@ URL：https://amorer.herokuapp.com/
 * 都会の学生。地方で働きたいと考えている。このとき、学生をやりながら地方の企業で働くことが物理的にできない。
 
 
-## サンプルユーザーでログイン(emailログイン)
+## サンプルユーザーでemailログイン
 * URL：https://amorer.herokuapp.com/
 * メールアドレス: amorer@amorer.com
 * パスワード： ilikeamorer
@@ -38,7 +39,7 @@ URL：https://amorer.herokuapp.com/
 
 →　ログイン
 
-## サンプルユーザーでログイン(facebookログイン)
+## サンプルユーザーでfacebookログイン
 ＊facebookログインは、個人認証不可のため下記テストアカウントのみログイン可能です。
 
 * メールアドレス: tesutoyuza_kpmtujg_tesutoyuza@tfbnw.net
@@ -54,7 +55,7 @@ facebookを開きログアウト(ログアウトしないと、普段使って�
 
 →　facebookのログイン画面で、サンプルユーザー(facebook)のメールアドレスとパスワードを入力
 
-→ログイン
+→　ログイン
 
 
 ## 技術
